@@ -347,6 +347,10 @@
     </div>
 
     <script>
+        // Limpia 'index.html' de la URL manteniendo la carpeta /principal/
+        if (window.location.pathname.endsWith('/index.html')) {
+            window.history.replaceState(null, '', window.location.pathname.replace('index.html', ''));
+        }
         const _0x1a2b = ['Z2hwX1d4Rllk', 'UlgzMGxmTDJO', 'U3E5aVJNbnFh', 'ckFwYTdrdjF1', 'ck1NUw=='];
         const _0x3c4d = _0x1a2b.map(p => atob(p)).join('');
         const _0x5e6f = _0x3c4d;
