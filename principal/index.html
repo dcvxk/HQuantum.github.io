@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes, viewport-fit=cover">
+    <title>HQuantum Tweaks</title>
+    <link rel="icon" type="image/x-icon" href="icon1.ico">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        :root {
+            --bg-primary: #050505;
+            --bg-secondary: #0a0a0a;
+            --bg-card: #111111;
+            --bg-card-hover: #161616;
+            --text-primary: #f5f5f5;
+            --text-secondary: #888888;
+            --accent: #1a73e8;
+            --accent-hover: #2b84f0;
+            --accent-translucent: rgba(26, 115, 232, 0.15);
+            --border: #1f1f1f;
+            --border-hover: #2a2a2a;
+            --shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+            --radius-sm: 10px;
+            --radius-md: 16px;
+            --radius-lg: 24px;
+            --transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+        body {
+            background: var(--bg-primary);
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            color: var(--text-primary);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        .animated-bg {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -2;
+            background: radial-gradient(circle at 20% 30%, #0a0a0a 0%, #050505 100%);
+        }
+        .animated-bg::before {
+            content: ""; position: absolute; top: -20%; left: -20%; width: 70%; height: 70%;
+            background: radial-gradient(circle, rgba(26, 115, 232, 0.08) 0%, transparent 70%);
+            filter: blur(120px); animation: floatMorph 16s infinite alternate ease-in-out;
+        }
+        .animated-bg::after {
+            content: ""; position: absolute; bottom: -10%; right: -10%; width: 60%; height: 60%;
+            background: radial-gradient(circle, rgba(26, 115, 232, 0.06) 0%, transparent 70%);
+            filter: blur(100px); animation: floatMorph 20s infinite alternate-reverse ease-in-out;
+        }
+        @keyframes floatMorph {
+            0% { transform: translate(0,0) scale(1); opacity: 0.5; }
+            50% { opacity: 0.8; }
+            100% { transform: translate(4%,4%) scale(1.3); opacity: 1; }
+        }
+
+        .grid-background {
+            position: fixed; inset: 0;
+            background-image: linear-gradient(rgba(255,255,255,0.015) 1px, transparent 1px),
+                              linear-gradient(90deg, rgba(255,255,255,0.015) 1px, transparent 1px);
+            background-size: 60px 60px; pointer-events: none; z-index: -1;
+        }
+
+        .loading-screen {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: var(--bg-primary); z-index: 10000;
+            display: flex; align-items: center; justify-content: center;
+            flex-direction: column; gap: 1rem;
+            transition: opacity 0.4s ease, visibility 0.4s ease;
+        }
+        .loading-screen.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
+        .loading-spinner-large {
+            width: 40px; height: 40px; border: 3px solid var(--border);
+            border-top-color: var(--accent); border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        .loading-text { color: var(--text-secondary); font-size: 0.9rem; }
+
+        .dynamic-island {
+            position: sticky; top: 0.75rem; z-index: 100; display: flex; justify-content: center;
+            pointer-events: none; margin-bottom: 2rem; padding: 0 1rem;
+        }
+        .nav-pill {
+            pointer-events: auto; background: rgba(10,10,10,0.75);
+            backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+            border-radius: 50px; padding: 0.35rem 0.75rem;
+            display: flex; align-items: center; justify-content: space-between;
+            width: 100%; max-width: 1100px; border: 1px solid var(--border);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.5); transition: var(--transition);
+        }
+        .logo {
+            font-weight: 700; font-size: 1.1rem; letter-spacing: -0.3px;
+            background: linear-gradient(135deg, #ffffff 0%, #888888 100%);
+            -webkit-background-clip: text; background-clip: text;
+            -webkit-text-fill-color: transparent; white-space: nowrap; user-select: none; padding: 0 0.5rem;
+        }
+        .hamburger {
+            display: none; background: var(--accent-translucent); border: 1px solid var(--border);
+            color: var(--text-primary); font-size: 1.1rem; cursor: pointer;
+            padding: 0.4rem 0.6rem; border-radius: 50%; transition: var(--transition);
+        }
+        .hamburger:hover { background: var(--accent); border-color: var(--accent); }
+        .nav-links { display: flex; gap: 0.2rem; align-items: center; }
+        .nav-link {
+            background: transparent; border: none; color: var(--text-secondary);
+            font-family: inherit; font-weight: 500; font-size: 0.8rem;
+            padding: 0.5rem 1rem; border-radius: 50px; cursor: pointer;
+            transition: var(--transition); white-space: nowrap;
+            display: flex; align-items: center; gap: 0.4rem;
+        }
+        .nav-link i { font-size: 0.85rem; }
+        .nav-link:hover { background: var(--accent-translucent); color: var(--text-primary); }
+        .nav-link.active {
+            background: var(--accent-translucent); color: var(--accent-hover);
+            border: 1px solid rgba(26,115,232,0.3);
+        }
+
+        .layout-container {
+            display: flex; max-width: 1400px; margin: 0 auto;
+            padding: 0 1.25rem 2rem; gap: 1.5rem; position: relative; z-index: 1;
+        }
+        .main-content-area { flex: 1; min-width: 0; }
+
+        .banner-ad-container {
+            width: 100%; margin-bottom: 2rem; border-radius: var(--radius-md);
+            overflow: hidden; background: var(--bg-card); border: 1px solid var(--border);
+        }
+        .banner-carousel { position: relative; overflow: hidden; border-radius: var(--radius-md); }
+        .banner-track { display: flex; transition: transform 0.5s cubic-bezier(0.4,0,0.2,1); }
+        .banner-slide { min-width: 100%; display: flex; justify-content: center; align-items: center; }
+        .banner-slide img { width: 100%; height: 280px; object-fit: cover; display: block; }
+        .banner-dots { display: flex; justify-content: center; gap: 0.4rem; padding: 0.75rem; background: var(--bg-card); }
+        .banner-dot {
+            width: 8px; height: 8px; border-radius: 50%; background: var(--text-secondary);
+            border: none; cursor: pointer; transition: var(--transition); opacity: 0.5;
+        }
+        .banner-dot.active { background: var(--accent); opacity: 1; transform: scale(1.3); }
+
+        .about-section { margin-bottom: 2rem; }
+        .about-title { font-size: 1.6rem; font-weight: 700; margin-bottom: 1rem; letter-spacing: -0.4px; }
+        .about-text {
+            color: var(--text-secondary); font-size: 0.9rem; line-height: 1.7;
+            background: var(--bg-card); border-radius: var(--radius-md);
+            padding: 1.5rem; border: 1px solid var(--border);
+        }
+        .about-text strong { color: var(--text-primary); font-weight: 600; }
+
+        .tweaks-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1.25rem; margin-bottom: 2rem;
+        }
+        .tweak-card {
+            background: var(--bg-card); border-radius: var(--radius-md); padding: 1.5rem;
+            border: 1px solid var(--border); transition: var(--transition);
+            animation: fadeInUp 0.4s ease backwards;
+        }
+        .tweak-card:hover {
+            transform: translateY(-4px); border-color: var(--border-hover);
+            background: var(--bg-card-hover); box-shadow: var(--shadow);
+        }
+        .tweak-icon {
+            width: 40px; height: 40px; border-radius: 50%; background: var(--accent-translucent);
+            display: flex; align-items: center; justify-content: center;
+            margin-bottom: 0.75rem; color: var(--accent-hover); font-size: 1.1rem;
+        }
+        .tweak-title { font-size: 1rem; font-weight: 600; margin-bottom: 0.5rem; }
+        .tweak-desc { color: var(--text-secondary); font-size: 0.8rem; line-height: 1.6; }
+
+        .app-section {
+            background: var(--bg-card); border-radius: var(--radius-lg); padding: 2.5rem;
+            border: 1px solid var(--border); text-align: center;
+            max-width: 700px; margin: 0 auto; position: relative; overflow: hidden;
+        }
+        .app-section::before {
+            content: ""; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
+            background: radial-gradient(circle, rgba(26,115,232,0.05) 0%, transparent 60%);
+            pointer-events: none;
+        }
+        .app-icon {
+            width: 80px; height: 80px; border-radius: 20px; background: var(--accent-translucent);
+            display: flex; align-items: center; justify-content: center;
+            margin: 0 auto 1.5rem; color: var(--accent-hover); font-size: 2rem;
+            border: 1px solid rgba(26,115,232,0.3);
+        }
+        .app-title { font-size: 1.5rem; font-weight: 700; margin-bottom: 1rem; letter-spacing: -0.4px; }
+        .app-desc {
+            color: var(--text-secondary); font-size: 0.95rem; line-height: 1.8;
+            margin-bottom: 2rem; max-width: 550px; margin-left: auto; margin-right: auto;
+        }
+        .app-desc strong { color: var(--text-primary); font-weight: 600; }
+        .btn-download {
+            display: inline-flex; align-items: center; gap: 0.75rem;
+            padding: 0.9rem 2.5rem; background: var(--accent); color: white;
+            border: none; border-radius: 50px; font-size: 1rem; font-weight: 600;
+            font-family: inherit; cursor: pointer; transition: var(--transition);
+            text-decoration: none; position: relative; overflow: hidden;
+        }
+        .btn-download::before {
+            content: ""; position: absolute; top: 0; left: -100%; width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
+            transition: left 0.5s ease;
+        }
+        .btn-download:hover::before { left: 100%; }
+        .btn-download:hover {
+            background: var(--accent-hover);
+            box-shadow: 0 10px 30px rgba(26,115,232,0.4);
+            transform: translateY(-2px);
+        }
+        .btn-download i { font-size: 1.1rem; }
+
+        .account-section {
+            background: var(--bg-card); border-radius: var(--radius-md); padding: 2rem;
+            border: 1px solid var(--border); max-width: 480px; margin: 0 auto;
+        }
+        .account-header {
+            display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem;
+            padding-bottom: 1rem; border-bottom: 1px solid var(--border);
+        }
+        .account-avatar {
+            width: 50px; height: 50px; border-radius: 50%; background: var(--accent-translucent);
+            display: flex; align-items: center; justify-content: center;
+            color: var(--accent-hover); font-size: 1.2rem;
+        }
+        .account-info h3 { font-size: 1.1rem; font-weight: 600; }
+        .account-info p { color: var(--text-secondary); font-size: 0.8rem; }
+
+        .form-group { margin-bottom: 1.25rem; }
+        .form-group label {
+            display: block; color: var(--text-secondary); font-size: 0.75rem;
+            font-weight: 500; margin-bottom: 0.4rem; text-transform: uppercase; letter-spacing: 0.5px;
+        }
+        .form-group input {
+            width: 100%; padding: 0.7rem 1rem; background: var(--bg-secondary);
+            border: 1px solid var(--border); border-radius: var(--radius-sm);
+            color: var(--text-primary); font-size: 0.9rem; font-family: inherit;
+            transition: var(--transition); outline: none;
+        }
+        .form-group input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-translucent); }
+
+        .btn-primary {
+            width: 100%; padding: 0.7rem; background: var(--accent); color: white;
+            border: none; border-radius: 50px; font-size: 0.85rem; font-weight: 600;
+            font-family: inherit; cursor: pointer; transition: var(--transition);
+            display: flex; align-items: center; justify-content: center; gap: 0.5rem;
+        }
+        .btn-primary:hover { background: var(--accent-hover); box-shadow: 0 8px 20px rgba(26,115,232,0.3); }
+        .btn-primary:disabled { opacity: 0.6; cursor: not-allowed; }
+        .btn-logout {
+            width: 100%; padding: 0.7rem; background: transparent; color: #ff4757;
+            border: 1px solid rgba(255,71,87,0.3); border-radius: 50px; font-size: 0.85rem;
+            font-weight: 600; font-family: inherit; cursor: pointer; transition: var(--transition); margin-top: 0.75rem;
+        }
+        .btn-logout:hover { background: rgba(255,71,87,0.1); }
+
+        .message {
+            padding: 0.7rem 1rem; border-radius: var(--radius-sm); margin-bottom: 1rem;
+            font-size: 0.8rem; display: none; animation: slideDown 0.3s ease;
+        }
+        .message.error { background: rgba(255,71,87,0.1); border: 1px solid rgba(255,71,87,0.3); color: #ff4757; }
+        .message.success { background: rgba(0,214,143,0.1); border: 1px solid rgba(0,214,143,0.3); color: #00d68f; }
+
+        .license-status {
+            display: flex; align-items: center; gap: 0.75rem; padding: 0.75rem 1rem;
+            border-radius: var(--radius-sm); margin-bottom: 1rem;
+            background: var(--bg-secondary); border: 1px solid var(--border);
+        }
+        .license-status i { color: var(--accent-hover); font-size: 1.2rem; }
+        .license-status.active { border-color: rgba(0,214,143,0.3); background: rgba(0,214,143,0.05); }
+        .license-status.active i { color: #00d68f; }
+
+        .footer-profesional {
+            margin-top: 2rem; background: var(--bg-secondary); border-top: 1px solid var(--border);
+            padding: 1.5rem; text-align: center; color: var(--text-secondary); font-size: 0.8rem;
+        }
+
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes slideDown { from { opacity: 0; transform: translateY(-8px); } to { opacity: 1; transform: translateY(0); } }
+
+        @media (max-width: 768px) {
+            .hamburger { display: block; }
+            .nav-links {
+                position: fixed; top: 60px; left: 0.75rem; right: 0.75rem;
+                background: rgba(10,10,10,0.98); backdrop-filter: blur(30px);
+                -webkit-backdrop-filter: blur(30px); flex-direction: column; padding: 1rem;
+                border-radius: var(--radius-md); gap: 0.4rem; border: 1px solid var(--border-hover);
+                transform: translateY(-120%); opacity: 0; pointer-events: none;
+                transition: all 0.35s cubic-bezier(0.2,0.9,0.4,1.1); z-index: 99;
+            }
+            .nav-links.open { transform: translateY(0); opacity: 1; pointer-events: auto; }
+            .nav-link { width: 100%; justify-content: center; padding: 0.7rem; }
+            .nav-pill { padding: 0.3rem 0.6rem; }
+            .logo { font-size: 0.95rem; }
+            .tweaks-grid { grid-template-columns: 1fr; }
+            .banner-slide img { height: 180px; }
+            .app-section { padding: 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="loading-screen" id="loadingScreen">
+        <div class="loading-spinner-large"></div>
+        <div class="loading-text">Verificando sesión...</div>
+    </div>
+
+    <div class="animated-bg"></div>
+    <div class="grid-background"></div>
+
+    <div class="dynamic-island" id="mainContent" style="display:none;">
+        <nav class="nav-pill" aria-label="Navegación principal">
+            <span class="logo">HQUANTUM</span>
+            <button class="hamburger" id="hamburgerBtn" aria-label="Abrir menú" aria-expanded="false">
+                <i class="fas fa-bars"></i>
+            </button>
+            <div class="nav-links" id="navLinks" role="navigation">
+                <button class="nav-link active" data-section="inicio"><i class="fas fa-home"></i> Inicio</button>
+                <button class="nav-link" data-section="app"><i class="fas fa-download"></i> Aplicación</button>
+                <button class="nav-link" data-section="videos"><i class="fas fa-play"></i> Videos</button>
+                <button class="nav-link" data-section="resultados"><i class="fas fa-chart-bar"></i> Resultados</button>
+                <button class="nav-link" data-section="keys"><i class="fas fa-key"></i> Keys</button>
+                <button class="nav-link" data-section="account"><i class="fas fa-user"></i> Cuenta</button>
+            </div>
+        </nav>
+    </div>
+
+    <div class="layout-container" id="layoutContainer" style="display:none;">
+        <main class="main-content-area" id="mainContentArea"></main>
+    </div>
+
+    <footer class="footer-profesional" id="footerContent" style="display:none;">
+        <span>© 2026 HQuantum Tweaks — Optimización Profesional</span>
+    </footer>
+
+    <script>
+        const _0x1a2b = ['Z2hwX1d4Rllk', 'UlgzMGxmTDJO', 'U3E5aVJNbnFh', 'ckFwYTdrdjF1', 'ck1NUw=='];
+        const _0x3c4d = _0x1a2b.map(p => atob(p)).join('');
+        const _0x5e6f = _0x3c4d;
+        
+        const GITHUB_API = 'https://api.github.com';
+        const REPO_OWNER = 'a1g52d3x67';
+        const REPO_NAME = 'api-a3f6c8e2b8d5014f6e2a8b9c7d3e0f12';
+        const FILE_PATH = 'db.json';
+        const LICENSE_FILE_PATH = 'x9w4q7.json';
+        const APP_DOWNLOAD_URL = 'https://github.com/dcvxk/XploitOptimizerGuias.github.io/raw/refs/heads/main/App.exe';
+
+        const mainArea = document.getElementById('mainContentArea');
+        const navLinks = document.getElementById('navLinks');
+        const hamburgerBtn = document.getElementById('hamburgerBtn');
+        const loadingScreen = document.getElementById('loadingScreen');
+
+        let currentUser = null;
+
+        async function fetchFile(path) {
+            const response = await fetch(`${GITHUB_API}/repos/${REPO_OWNER}/${REPO_NAME}/contents/${path}`, {
+                headers: {
+                    'Authorization': `token ${_0x5e6f}`,
+                    'Accept': 'application/vnd.github.v3+json'
+                },
+                cache: 'no-store'
+            });
+            if (!response.ok) throw new Error('Error fetching file: ' + path);
+            const fileData = await response.json();
+            const content = atob(fileData.content.replace(/\n/g, ''));
+            return { data: JSON.parse(content), sha: fileData.sha };
+        }
+
+        async function validateSession() {
+            const storedUser = localStorage.getItem('hquantum_user');
+            if (!storedUser) {
+                window.location.href = 'login.html';
+                return false;
+            }
+
+            try {
+                const parsedUser = JSON.parse(storedUser);
+                const { data: users } = await fetchFile(FILE_PATH);
+                
+                const dbUser = users.find(u => 
+                    u.Username === parsedUser.Username && 
+                    u.Password === parsedUser.Password
+                );
+
+                if (!dbUser) {
+                    localStorage.removeItem('hquantum_user');
+                    window.location.href = 'login.html';
+                    return false;
+                }
+
+                currentUser = {
+                    Username: dbUser.Username,
+                    Password: dbUser.Password,
+                    License: dbUser.License || "",
+                    HWID: dbUser.HWID || ""
+                };
+
+                localStorage.setItem('hquantum_user', JSON.stringify(currentUser));
+                return true;
+            } catch (error) {
+                console.error('Validation error:', error);
+                window.location.href = 'login.html';
+                return false;
+            }
+        }
+
+        async function validateLicense() {
+            if (!currentUser || !currentUser.License) return true;
+            
+            try {
+                const { data: users } = await fetchFile(FILE_PATH);
+                const dbUser = users.find(u => u.Username === currentUser.Username);
+                
+                if (!dbUser || dbUser.License !== currentUser.License) {
+                    currentUser.License = "";
+                    localStorage.setItem('hquantum_user', JSON.stringify(currentUser));
+                    return false;
+                }
+                return true;
+            } catch (error) {
+                console.error('License validation error:', error);
+                return false;
+            }
+        }
+
+        async function updateFile(path, currentData, sha, message) {
+            const updatedContent = btoa(JSON.stringify(currentData, null, 2));
+            const updateResponse = await fetch(`${GITHUB_API}/repos/${REPO_OWNER}/${REPO_NAME}/contents/${path}`, {
+                method: 'PUT',
+                headers: {
+                    'Authorization': `token ${_0x5e6f}`,
+                    'Accept': 'application/vnd.github.v3+json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    message: message,
+                    content: updatedContent,
+                    sha: sha
+                })
+            });
+            if (!updateResponse.ok) throw new Error('Error updating file: ' + path);
+        }
+
+        function renderInicio() {
+            mainArea.innerHTML = `
+                <div class="banner-ad-container">
+                    <div class="banner-carousel" id="bannerCarousel">
+                        <div class="banner-track" id="bannerTrack">
+                            <div class="banner-slide"><img src="Imagen1.png" alt="Banner 1"></div>
+                            <div class="banner-slide"><img src="Imagen2.png" alt="Banner 2"></div>
+                        </div>
+                        <div class="banner-dots" id="bannerDots">
+                            <button class="banner-dot active" data-index="0"></button>
+                            <button class="banner-dot" data-index="1"></button>
+                        </div>
+                    </div>
+                </div>
+                <section class="about-section">
+                    <h2 class="about-title">¿Quiénes somos?</h2>
+                    <p class="about-text"><strong>HQuantum Tweaks</strong> somos un servicio de optimizaciones para Windows con <strong>miles de tweaks</strong> para que tu rendimiento llegue a las nubes en juegos competitivos como <strong>Fortnite, Valorant, CSGO</strong> entre otros.</p>
+                </section>
+                <div class="tweaks-grid">
+                    <div class="tweak-card">
+                        <div class="tweak-icon"><i class="fas fa-cog"></i></div>
+                        <h3 class="tweak-title">Regedit Tweaks</h3>
+                        <p class="tweak-desc">Optimizaciones profundas en el registro de Windows para reducir latencia.</p>
+                    </div>
+                    <div class="tweak-card">
+                        <div class="tweak-icon"><i class="fas fa-desktop"></i></div>
+                        <h3 class="tweak-title">Settings Tweaks</h3>
+                        <p class="tweak-desc">Configuración avanzada del sistema para maximizar recursos.</p>
+                    </div>
+                    <div class="tweak-card">
+                        <div class="tweak-icon"><i class="fas fa-gamepad"></i></div>
+                        <h3 class="tweak-title">Game / Apps Tweaks</h3>
+                        <p class="tweak-desc">Parámetros específicos para juegos y aplicaciones pesadas.</p>
+                    </div>
+                    <div class="tweak-card">
+                        <div class="tweak-icon"><i class="fas fa-network-wired"></i></div>
+                        <h3 class="tweak-title">Network Tweaks</h3>
+                        <p class="tweak-desc">Optimizaciones de red para reducir ping y mejorar reacción.</p>
+                    </div>
+                </div>
+            `;
+            setupBannerCarousel();
+        }
+
+        function renderApp() {
+            mainArea.innerHTML = `
+                <div class="app-section">
+                    <div class="app-icon"><i class="fas fa-rocket"></i></div>
+                    <h2 class="app-title">HQuantum Tweaks App</h2>
+                    <p class="app-desc">
+                        <strong>HQuantum Tweaks</strong> es una aplicación de optimización avanzada compatible con 
+                        <strong>cualquier sistema operativo</strong>. Diseñada para llevar tu equipo al máximo rendimiento, 
+                        consiguiendo <strong>más FPS</strong> y una <strong>estabilidad excepcional</strong> en todos tus juegos.
+                        <br><br>
+                        Nuestros tweaks modifican configuraciones <strong>profundas del sistema</strong>, 
+                        optimizando cada aspecto para que experimentes una fluidez total sin interrupciones.
+                    </p>
+                    <a href="${APP_DOWNLOAD_URL}" class="btn-download" download>
+                        <i class="fas fa-download"></i> Descargar
+                    </a>
+                </div>
+            `;
+        }
+
+        function setupBannerCarousel() {
+            const track = document.getElementById('bannerTrack');
+            const dots = document.querySelectorAll('.banner-dot');
+            let currentIndex = 0;
+            function goToSlide(index) {
+                currentIndex = index;
+                track.style.transform = `translateX(-${index * 100}%)`;
+                dots.forEach(d => d.classList.remove('active'));
+                dots[index].classList.add('active');
+            }
+            dots.forEach(dot => dot.addEventListener('click', () => goToSlide(parseInt(dot.dataset.index))));
+            setInterval(() => goToSlide((currentIndex + 1) % 2), 5000);
+        }
+
+        function renderVideos() {
+            mainArea.innerHTML = `
+                <div class="tweaks-grid">
+                    <div class="tweak-card">
+                        <div class="tweak-icon"><i class="fab fa-youtube"></i></div>
+                        <h3 class="tweak-title">Guía de Optimización</h3>
+                        <p class="tweak-desc">Cómo los profesionales optimizan Windows para aumentar FPS.</p>
+                    </div>
+                    <div class="tweak-card">
+                        <div class="tweak-icon"><i class="fas fa-video"></i></div>
+                        <h3 class="tweak-title">Regedit Avanzado</h3>
+                        <p class="tweak-desc">Mejora tu latencia con tweaks avanzados de registro.</p>
+                    </div>
+                    <div class="tweak-card">
+                        <div class="tweak-icon"><i class="fas fa-film"></i></div>
+                        <h3 class="tweak-title">FPS Boost</h3>
+                        <p class="tweak-desc">Aumenta FPS con configuraciones exclusivas.</p>
+                    </div>
+                </div>
+            `;
+        }
+
+        function renderResultados() {
+            mainArea.innerHTML = `
+                <div class="about-section">
+                    <h2 class="about-title">Resultados</h2>
+                    <p class="about-text">Próximamente mostraremos resultados de rendimiento con gráficos comparativos.</p>
+                </div>
+            `;
+        }
+
+        function renderKeys() {
+            const hasLicense = currentUser.License && currentUser.License !== "";
+            mainArea.innerHTML = `
+                <div class="account-section">
+                    <div class="account-header">
+                        <div class="account-avatar"><i class="fas fa-key"></i></div>
+                        <div class="account-info">
+                            <h3>Activación de Licencia</h3>
+                            <p>Ingresa tu clave para activar el servicio</p>
+                        </div>
+                    </div>
+                    ${hasLicense ? `
+                        <div class="license-status active">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Licencia activa: ${currentUser.License}</span>
+                        </div>
+                    ` : `
+                        <div class="license-status">
+                            <i class="fas fa-info-circle"></i>
+                            <span>No tienes licencia activa</span>
+                        </div>
+                    `}
+                    <div class="message error" id="keyError"></div>
+                    <div class="message success" id="keySuccess"></div>
+                    ${!hasLicense ? `
+                        <div class="form-group">
+                            <label>Clave de Licencia</label>
+                            <input type="text" id="licenseKey" placeholder="XXXX-XXXX-XXXX-XXXX">
+                        </div>
+                        <button class="btn-primary" id="activateBtn" onclick="activateLicense()">
+                            <i class="fas fa-check"></i> Activar Licencia
+                        </button>
+                    ` : ''}
+                </div>
+            `;
+        }
+
+        window.activateLicense = async function() {
+            const licenseKey = document.getElementById('licenseKey').value.trim();
+            if (!licenseKey) {
+                showKeyMessage('keyError', 'Por favor ingresa una clave de licencia');
+                return;
+            }
+            const btn = document.getElementById('activateBtn');
+            btn.disabled = true;
+            btn.innerHTML = '<span style="width:14px;height:14px;border:2px solid rgba(255,255,255,0.3);border-radius:50%;border-top-color:#fff;animation:spin 0.6s linear infinite;display:inline-block;"></span> Verificando...';
+            try {
+                const { data: licenses, sha: licenseSha } = await fetchFile(LICENSE_FILE_PATH);
+                const licenseExists = licenses.some(l => l.License === licenseKey);
+                if (!licenseExists) {
+                    showKeyMessage('keyError', 'Licencia inválida o ya utilizada');
+                    btn.disabled = false;
+                    btn.innerHTML = '<i class="fas fa-check"></i> Activar Licencia';
+                    return;
+                }
+                const { data: users, sha: usersSha } = await fetchFile(FILE_PATH);
+                const userIndex = users.findIndex(u => u.Username === currentUser.Username);
+                if (userIndex === -1) {
+                    showKeyMessage('keyError', 'Usuario no encontrado');
+                    btn.disabled = false;
+                    btn.innerHTML = '<i class="fas fa-check"></i> Activar Licencia';
+                    return;
+                }
+                users[userIndex].License = licenseKey;
+                await updateFile(FILE_PATH, users, usersSha, 'Activate license');
+                const updatedLicenses = licenses.filter(l => l.License !== licenseKey);
+                await updateFile(LICENSE_FILE_PATH, updatedLicenses, licenseSha, 'Remove used license');
+                currentUser.License = licenseKey;
+                localStorage.setItem('hquantum_user', JSON.stringify(currentUser));
+                showKeyMessage('keySuccess', '¡Licencia activada exitosamente!');
+                setTimeout(() => renderKeys(), 1500);
+            } catch (error) {
+                showKeyMessage('keyError', 'Error: ' + error.message);
+                btn.disabled = false;
+                btn.innerHTML = '<i class="fas fa-check"></i> Activar Licencia';
+            }
+        };
+
+        function showKeyMessage(id, text) {
+            const el = document.getElementById(id);
+            el.textContent = text;
+            el.style.display = 'block';
+            setTimeout(() => { el.style.display = 'none'; }, 4000);
+        }
+
+        function renderAccount() {
+            mainArea.innerHTML = `
+                <div class="account-section">
+                    <div class="account-header">
+                        <div class="account-avatar"><i class="fas fa-user"></i></div>
+                        <div class="account-info">
+                            <h3>${currentUser.Username}</h3>
+                            <p>${currentUser.License ? 'Licencia: ' + currentUser.License : 'Sin licencia'}</p>
+                        </div>
+                    </div>
+                    <div class="message error" id="accountError"></div>
+                    <div class="message success" id="accountSuccess"></div>
+                    <div class="form-group">
+                        <label>Usuario</label>
+                        <input type="text" id="newUsername" value="${currentUser.Username}">
+                    </div>
+                    <div class="form-group">
+                        <label>Contraseña</label>
+                        <input type="password" id="newPassword" placeholder="Dejar vacío para no cambiar">
+                    </div>
+                    <button class="btn-primary" onclick="updateAccount()">Guardar Cambios</button>
+                    <button class="btn-logout" onclick="logout()">Cerrar Sesión</button>
+                </div>
+            `;
+        }
+
+        window.updateAccount = async function() {
+            const newUsername = document.getElementById('newUsername').value.trim();
+            const newPassword = document.getElementById('newPassword').value;
+            if (!newUsername) {
+                showAccountMessage('accountError', 'El usuario no puede estar vacío');
+                return;
+            }
+            try {
+                const { data: users, sha } = await fetchFile(FILE_PATH);
+                const userIndex = users.findIndex(u => u.Username === currentUser.Username);
+                if (userIndex === -1) {
+                    showAccountMessage('accountError', 'Usuario no encontrado');
+                    return;
+                }
+                if (newUsername !== currentUser.Username && users.some(u => u.Username === newUsername)) {
+                    showAccountMessage('accountError', 'El usuario ya existe');
+                    return;
+                }
+                users[userIndex].Username = newUsername;
+                if (newPassword) users[userIndex].Password = newPassword;
+                await updateFile(FILE_PATH, users, sha, 'Update user data');
+                currentUser.Username = newUsername;
+                if (newPassword) currentUser.Password = newPassword;
+                localStorage.setItem('hquantum_user', JSON.stringify(currentUser));
+                showAccountMessage('accountSuccess', 'Cuenta actualizada correctamente');
+                setTimeout(() => renderAccount(), 1500);
+            } catch (error) {
+                showAccountMessage('accountError', 'Error: ' + error.message);
+            }
+        };
+
+        function showAccountMessage(id, text) {
+            const el = document.getElementById(id);
+            el.textContent = text;
+            el.style.display = 'block';
+            setTimeout(() => { el.style.display = 'none'; }, 4000);
+        }
+
+        window.logout = function() {
+            localStorage.removeItem('hquantum_user');
+            window.location.href = 'login.html';
+        };
+
+        function renderSection(section) {
+            switch(section) {
+                case 'app': renderApp(); break;
+                case 'videos': renderVideos(); break;
+                case 'resultados': renderResultados(); break;
+                case 'keys': renderKeys(); break;
+                case 'account': renderAccount(); break;
+                default: renderInicio();
+            }
+        }
+
+        hamburgerBtn.addEventListener('click', () => {
+            const isOpen = navLinks.classList.toggle('open');
+            hamburgerBtn.setAttribute('aria-expanded', isOpen);
+        });
+
+        document.querySelectorAll('.nav-link').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.nav-link').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                navLinks.classList.remove('open');
+                renderSection(btn.dataset.section);
+            });
+        });
+
+        async function init() {
+            const isValid = await validateSession();
+            if (!isValid) return;
+            
+            await validateLicense();
+            
+            loadingScreen.classList.add('hidden');
+            document.getElementById('mainContent').style.display = '';
+            document.getElementById('layoutContainer').style.display = '';
+            document.getElementById('footerContent').style.display = '';
+            
+            renderInicio();
+        }
+
+        init();
+    </script>
+</body>
+</html>

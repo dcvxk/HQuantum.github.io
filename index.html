@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes, viewport-fit=cover">
+    <title>HQuantum Tweaks | Acceso</title>
+    <link rel="icon" type="image/x-icon" href="icon.ico">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        :root {
+            --bg-primary: #050505;
+            --bg-secondary: #0a0a0a;
+            --bg-card: #111111;
+            --bg-card-hover: #161616;
+            --text-primary: #f5f5f5;
+            --text-secondary: #888888;
+            --accent: #1a73e8;
+            --accent-hover: #2b84f0;
+            --accent-translucent: rgba(26, 115, 232, 0.15);
+            --border: #1f1f1f;
+            --border-hover: #2a2a2a;
+            --shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+            --radius-sm: 10px;
+            --radius-md: 16px;
+            --radius-lg: 24px;
+            --radius-xl: 32px;
+            --transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            -webkit-text-size-adjust: 100%;
+        }
+
+        body {
+            background: var(--bg-primary);
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            color: var(--text-primary);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            overflow-x: hidden;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+            position: relative;
+        }
+
+        .animated-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            background: radial-gradient(circle at 20% 30%, #0a0a0a 0%, #050505 100%);
+        }
+
+        .animated-bg::before {
+            content: "";
+            position: absolute;
+            top: -20%;
+            left: -20%;
+            width: 70%;
+            height: 70%;
+            background: radial-gradient(circle, rgba(26, 115, 232, 0.08) 0%, transparent 70%);
+            filter: blur(120px);
+            animation: floatMorph 16s infinite alternate ease-in-out;
+        }
+
+        .animated-bg::after {
+            content: "";
+            position: absolute;
+            bottom: -10%;
+            right: -10%;
+            width: 60%;
+            height: 60%;
+            background: radial-gradient(circle, rgba(26, 115, 232, 0.06) 0%, transparent 70%);
+            filter: blur(100px);
+            animation: floatMorph 20s infinite alternate-reverse ease-in-out;
+        }
+
+        @keyframes floatMorph {
+            0% { transform: translate(0, 0) scale(1); opacity: 0.5; }
+            50% { opacity: 0.8; }
+            100% { transform: translate(4%, 4%) scale(1.3); opacity: 1; }
+        }
+
+        .grid-background {
+            position: fixed;
+            inset: 0;
+            background-image: 
+                linear-gradient(rgba(255, 255, 255, 0.015) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.015) 1px, transparent 1px);
+            background-size: 60px 60px;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .auth-container {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: 2.5rem;
+            width: 100%;
+            max-width: 420px;
+            position: relative;
+            z-index: 1;
+            box-shadow: var(--shadow);
+            animation: fadeInUp 0.5s ease;
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .auth-logo {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .auth-logo h1 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            letter-spacing: -0.4px;
+            background: linear-gradient(135deg, #ffffff 0%, #888888 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0.5rem;
+        }
+
+        .auth-logo p {
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+        }
+
+        .auth-divider {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin: 1.5rem 0;
+            color: var(--text-secondary);
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .auth-divider::before,
+        .auth-divider::after {
+            content: "";
+            flex: 1;
+            height: 1px;
+            background: var(--border);
+        }
+
+        .form-group {
+            margin-bottom: 1.25rem;
+        }
+
+        .form-group label {
+            display: block;
+            color: var(--text-secondary);
+            font-size: 0.75rem;
+            font-weight: 500;
+            margin-bottom: 0.4rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 0.7rem 1rem;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            color: var(--text-primary);
+            font-size: 0.9rem;
+            font-family: inherit;
+            transition: var(--transition);
+            outline: none;
+        }
+
+        .form-group input:focus {
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px var(--accent-translucent);
+        }
+
+        .form-group input::placeholder {
+            color: #555;
+        }
+
+        .btn-primary {
+            width: 100%;
+            padding: 0.7rem;
+            background: var(--accent);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            font-family: inherit;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .btn-primary:hover {
+            background: var(--accent-hover);
+            box-shadow: 0 8px 20px rgba(26, 115, 232, 0.3);
+        }
+
+        .btn-primary:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .btn-secondary {
+            width: 100%;
+            padding: 0.7rem;
+            background: transparent;
+            color: var(--text-secondary);
+            border: 1px solid var(--border);
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            font-family: inherit;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--accent);
+            color: var(--text-primary);
+            background: var(--accent-translucent);
+        }
+
+        .message {
+            padding: 0.7rem 1rem;
+            border-radius: var(--radius-sm);
+            margin-bottom: 1rem;
+            font-size: 0.8rem;
+            display: none;
+            animation: slideDown 0.3s ease;
+        }
+
+        .message.error {
+            background: rgba(255, 71, 87, 0.1);
+            border: 1px solid rgba(255, 71, 87, 0.3);
+            color: #ff4757;
+        }
+
+        .message.success {
+            background: rgba(0, 214, 143, 0.1);
+            border: 1px solid rgba(0, 214, 143, 0.3);
+            color: #00d68f;
+        }
+
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .loading-spinner {
+            display: inline-block;
+            width: 14px;
+            height: 14px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: #fff;
+            animation: spin 0.6s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .auth-footer {
+            text-align: center;
+            margin-top: 1.5rem;
+            color: var(--text-secondary);
+            font-size: 0.75rem;
+        }
+
+        @media (max-width: 400px) {
+            .auth-container {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="animated-bg"></div>
+    <div class="grid-background"></div>
+
+    <div class="auth-container">
+        <div class="auth-logo">
+            <h1>HQUANTUM</h1>
+            <p id="modeText">Acceso Seguro</p>
+        </div>
+
+        <div class="message error" id="errorMessage"></div>
+        <div class="message success" id="successMessage"></div>
+
+        <form id="authForm">
+            <div class="form-group">
+                <label for="username">Usuario</label>
+                <input type="text" id="username" placeholder="Ingresa tu usuario" required autocomplete="off">
+            </div>
+            <div class="form-group">
+                <label for="password">Contraseña</label>
+                <input type="password" id="password" placeholder="Ingresa tu contraseña" required autocomplete="off">
+            </div>
+            <button type="submit" class="btn-primary" id="submitBtn">
+                <i class="fas fa-sign-in-alt"></i> <span id="submitText">Iniciar Sesión</span>
+            </button>
+        </form>
+
+        <div class="auth-divider">o</div>
+
+        <button class="btn-secondary" onclick="toggleMode()">
+            <i class="fas fa-user-plus"></i> <span id="toggleText">Crear Cuenta</span>
+        </button>
+
+        <div class="auth-footer">
+            HQuantum Tweaks © 2026
+        </div>
+    </div>
+
+    <script>
+        const _0x1a2b = ['Z2hwX1d4Rllk', 'UlgzMGxmTDJO', 'U3E5aVJNbnFh', 'ckFwYTdrdjF1', 'ck1NUw=='];
+        const _0x3c4d = _0x1a2b.map(p => atob(p)).join('');
+        const _0x5e6f = _0x3c4d;
+        
+        const GITHUB_API = 'https://api.github.com';
+        const REPO_OWNER = 'a1g52d3x67';
+        const REPO_NAME = 'api-a3f6c8e2b8d5014f6e2a8b9c7d3e0f12';
+        const FILE_PATH = 'db.json';
+
+        let isLoginMode = true;
+
+        if (localStorage.getItem('hquantum_user')) {
+            window.location.href = 'principal/index.html';
+        }
+
+        function toggleMode() {
+            isLoginMode = !isLoginMode;
+            document.getElementById('submitText').textContent = isLoginMode ? 'Iniciar Sesión' : 'Crear Cuenta';
+            document.getElementById('toggleText').textContent = isLoginMode ? 'Crear Cuenta' : 'Volver al Login';
+            document.getElementById('modeText').textContent = isLoginMode ? 'Acceso Seguro' : 'Nueva Cuenta';
+            document.querySelector('#submitBtn i').className = isLoginMode ? 'fas fa-sign-in-alt' : 'fas fa-user-plus';
+            document.querySelector('.btn-secondary i').className = isLoginMode ? 'fas fa-user-plus' : 'fas fa-sign-in-alt';
+            document.getElementById('username').value = '';
+            document.getElementById('password').value = '';
+            hideMessages();
+            document.getElementById('username').focus();
+        }
+
+        function showError(msg) {
+            const el = document.getElementById('errorMessage');
+            el.textContent = msg;
+            el.style.display = 'block';
+            document.getElementById('successMessage').style.display = 'none';
+            setTimeout(() => el.style.display = 'none', 5000);
+        }
+
+        function showSuccess(msg) {
+            const el = document.getElementById('successMessage');
+            el.textContent = msg;
+            el.style.display = 'block';
+            document.getElementById('errorMessage').style.display = 'none';
+            setTimeout(() => el.style.display = 'none', 5000);
+        }
+
+        function hideMessages() {
+            document.getElementById('errorMessage').style.display = 'none';
+            document.getElementById('successMessage').style.display = 'none';
+        }
+
+        function setLoading(loading) {
+            const btn = document.getElementById('submitBtn');
+            const text = document.getElementById('submitText');
+            if (loading) {
+                btn.disabled = true;
+                btn.innerHTML = '<span class="loading-spinner"></span> Procesando...';
+            } else {
+                btn.disabled = false;
+                btn.innerHTML = `<i class="${isLoginMode ? 'fas fa-sign-in-alt' : 'fas fa-user-plus'}"></i> <span>${isLoginMode ? 'Iniciar Sesión' : 'Crear Cuenta'}</span>`;
+            }
+        }
+
+        async function fetchUsers() {
+            const response = await fetch(`${GITHUB_API}/repos/${REPO_OWNER}/${REPO_NAME}/contents/${FILE_PATH}`, {
+                headers: {
+                    'Authorization': `token ${_0x5e6f}`,
+                    'Accept': 'application/vnd.github.v3+json'
+                }
+            });
+            if (!response.ok) throw new Error('Error al obtener datos');
+            const fileData = await response.json();
+            const content = atob(fileData.content.replace(/\n/g, ''));
+            return { users: JSON.parse(content), sha: fileData.sha };
+        }
+
+        async function updateFile(currentData, sha) {
+            const updatedContent = btoa(JSON.stringify(currentData, null, 2));
+            const updateResponse = await fetch(`${GITHUB_API}/repos/${REPO_OWNER}/${REPO_NAME}/contents/${FILE_PATH}`, {
+                method: 'PUT',
+                headers: {
+                    'Authorization': `token ${_0x5e6f}`,
+                    'Accept': 'application/vnd.github.v3+json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    message: 'Add new user',
+                    content: updatedContent,
+                    sha: sha
+                })
+            });
+            if (!updateResponse.ok) throw new Error('Error al actualizar');
+        }
+
+        document.getElementById('authForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const username = document.getElementById('username').value.trim();
+            const password = document.getElementById('password').value;
+            
+            if (!username || !password) {
+                showError('Por favor completa todos los campos');
+                return;
+            }
+
+            hideMessages();
+            setLoading(true);
+
+            try {
+                const { users, sha } = await fetchUsers();
+                
+                if (isLoginMode) {
+                    const user = users.find(u => u.Username === username && u.Password === password);
+                    if (user) {
+                        localStorage.setItem('hquantum_user', JSON.stringify(user));
+                        showSuccess('¡Inicio de sesión exitoso!');
+                        setTimeout(() => window.location.href = 'principal/index.html', 1200);
+                    } else {
+                        showError('Usuario o contraseña incorrectos');
+                    }
+                } else {
+                    if (users.some(u => u.Username === username)) {
+                        showError('El usuario ya existe');
+                        setLoading(false);
+                        return;
+                    }
+                    
+                    const newUser = {
+                        Username: username,
+                        Password: password,
+                        License: "",
+                        HWID: ""
+                    };
+                    
+                    users.push(newUser);
+                    await updateFile(users, sha);
+                    
+                    localStorage.setItem('hquantum_user', JSON.stringify(newUser));
+                    showSuccess('¡Cuenta creada exitosamente!');
+                    setTimeout(() => window.location.href = 'principal/index.html', 1200);
+                }
+            } catch (error) {
+                showError('Error: ' + error.message);
+            } finally {
+                setLoading(false);
+            }
+        });
+
+        document.getElementById('username').focus();
+    </script>
+</body>
+</html>
