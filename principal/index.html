@@ -277,6 +277,35 @@
         .license-status.active { border-color: rgba(0,214,143,0.3); background: rgba(0,214,143,0.05); }
         .license-status.active i { color: #00d68f; }
 
+        .license-purchase {
+            text-align: center; padding: 2rem; background: var(--bg-card);
+            border-radius: var(--radius-lg); border: 1px solid var(--border);
+            max-width: 400px; margin: 0 auto;
+        }
+        .license-product-img {
+            width: 150px; height: 150px; object-fit: contain;
+            margin: 0 auto 1.5rem; display: block;
+            filter: drop-shadow(0 10px 30px rgba(26,115,232,0.3));
+        }
+        .license-product-title {
+            font-size: 1.2rem; font-weight: 700; margin-bottom: 0.5rem;
+        }
+        .license-product-desc {
+            color: var(--text-secondary); font-size: 0.85rem; margin-bottom: 1.5rem;
+        }
+        .btn-purchase {
+            display: inline-flex; align-items: center; gap: 0.6rem;
+            padding: 0.85rem 2rem; background: var(--accent); color: white;
+            border: none; border-radius: 50px; font-size: 0.9rem; font-weight: 600;
+            font-family: inherit; cursor: pointer; transition: var(--transition);
+            text-decoration: none;
+        }
+        .btn-purchase:hover {
+            background: var(--accent-hover);
+            box-shadow: 0 10px 25px rgba(26,115,232,0.4);
+            transform: translateY(-2px);
+        }
+
         .footer-profesional {
             margin-top: 2rem; background: var(--bg-secondary); border-top: 1px solid var(--border);
             padding: 1.5rem; text-align: center; color: var(--text-secondary); font-size: 0.8rem;
@@ -302,6 +331,7 @@
             .tweaks-grid { grid-template-columns: 1fr; }
             .banner-slide img { height: 180px; }
             .app-section { padding: 1.5rem; }
+            .license-product-img { width: 120px; height: 120px; }
         }
     </style>
 </head>
@@ -353,6 +383,8 @@
         const FILE_PATH = 'db.json';
         const LICENSE_FILE_PATH = 'x9w4q7.json';
         const APP_DOWNLOAD_URL = 'https://github.com/dcvxk/XploitOptimizerGuias.github.io/raw/refs/heads/main/App.exe';
+        const PAYPAL_URL = 'https://www.paypal.com/ncp/payment/NNFD22L7HHBR6';
+        const LICENSE_PRODUCT_IMG = 'f4df2274-2494-403a-a5e2-f891b455f134-removebg-preview.png';
 
         const mainArea = document.getElementById('mainContentArea');
         const navLinks = document.getElementById('navLinks');
@@ -561,39 +593,46 @@
 
         function renderKeys() {
             const hasLicense = currentUser.License && currentUser.License !== "";
-            mainArea.innerHTML = `
-                <div class="account-section">
-                    <div class="account-header">
-                        <div class="account-avatar"><i class="fas fa-key"></i></div>
-                        <div class="account-info">
-                            <h3>Activación de Licencia</h3>
-                            <p>Ingresa tu clave para activar el servicio</p>
+            
+            if (!hasLicense) {
+                mainArea.innerHTML = `
+                    <div class="license-purchase">
+                        <img src="${LICENSE_PRODUCT_IMG}" alt="Licencia HQuantum" class="license-product-img">
+                        <h3 class="license-product-title">Licencia de HQuantum Tweaks</h3>
+                        <p class="license-product-desc">Obtén acceso completo a todas las optimizaciones premium</p>
+                        <a href="${PAYPAL_URL}" target="_blank" class="btn-purchase">
+                            <i class="fab fa-paypal"></i> Comprar Licencia
+                        </a>
+                        <div style="margin-top:1.5rem;padding-top:1.5rem;border-top:1px solid var(--border);">
+                            <div class="message error" id="keyError"></div>
+                            <div class="message success" id="keySuccess"></div>
+                            <div class="form-group" style="text-align:left;">
+                                <label>¿Ya tienes una clave?</label>
+                                <input type="text" id="licenseKey" placeholder="XXXX-XXXX-XXXX-XXXX">
+                            </div>
+                            <button class="btn-primary" id="activateBtn" onclick="activateLicense()">
+                                <i class="fas fa-check"></i> Activar Licencia
+                            </button>
                         </div>
                     </div>
-                    ${hasLicense ? `
+                `;
+            } else {
+                mainArea.innerHTML = `
+                    <div class="account-section">
+                        <div class="account-header">
+                            <div class="account-avatar"><i class="fas fa-key"></i></div>
+                            <div class="account-info">
+                                <h3>Licencia Activa</h3>
+                                <p>Tu licencia está funcionando</p>
+                            </div>
+                        </div>
                         <div class="license-status active">
                             <i class="fas fa-check-circle"></i>
-                            <span>Licencia activa: ${currentUser.License}</span>
+                            <span>Licencia: ${currentUser.License}</span>
                         </div>
-                    ` : `
-                        <div class="license-status">
-                            <i class="fas fa-info-circle"></i>
-                            <span>No tienes licencia activa</span>
-                        </div>
-                    `}
-                    <div class="message error" id="keyError"></div>
-                    <div class="message success" id="keySuccess"></div>
-                    ${!hasLicense ? `
-                        <div class="form-group">
-                            <label>Clave de Licencia</label>
-                            <input type="text" id="licenseKey" placeholder="XXXX-XXXX-XXXX-XXXX">
-                        </div>
-                        <button class="btn-primary" id="activateBtn" onclick="activateLicense()">
-                            <i class="fas fa-check"></i> Activar Licencia
-                        </button>
-                    ` : ''}
-                </div>
-            `;
+                    </div>
+                `;
+            }
         }
 
         window.activateLicense = async function() {
