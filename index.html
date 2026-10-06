@@ -26,21 +26,10 @@
             --radius-sm: 10px;
             --radius-md: 16px;
             --radius-lg: 24px;
-            --radius-xl: 32px;
             --transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
         }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        html {
-            scroll-behavior: smooth;
-            -webkit-text-size-adjust: 100%;
-        }
-
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
         body {
             background: var(--bg-primary);
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
@@ -56,256 +45,144 @@
             padding: 1rem;
             position: relative;
         }
-
         .animated-bg {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             z-index: -2;
             background: radial-gradient(circle at 20% 30%, #0a0a0a 0%, #050505 100%);
         }
-
         .animated-bg::before {
-            content: "";
-            position: absolute;
-            top: -20%;
-            left: -20%;
-            width: 70%;
-            height: 70%;
+            content: ""; position: absolute; top: -20%; left: -20%; width: 70%; height: 70%;
             background: radial-gradient(circle, rgba(26, 115, 232, 0.08) 0%, transparent 70%);
             filter: blur(120px);
             animation: floatMorph 16s infinite alternate ease-in-out;
         }
-
         .animated-bg::after {
-            content: "";
-            position: absolute;
-            bottom: -10%;
-            right: -10%;
-            width: 60%;
-            height: 60%;
+            content: ""; position: absolute; bottom: -10%; right: -10%; width: 60%; height: 60%;
             background: radial-gradient(circle, rgba(26, 115, 232, 0.06) 0%, transparent 70%);
             filter: blur(100px);
             animation: floatMorph 20s infinite alternate-reverse ease-in-out;
         }
-
         @keyframes floatMorph {
             0% { transform: translate(0, 0) scale(1); opacity: 0.5; }
             50% { opacity: 0.8; }
             100% { transform: translate(4%, 4%) scale(1.3); opacity: 1; }
         }
-
         .grid-background {
-            position: fixed;
-            inset: 0;
-            background-image: 
+            position: fixed; inset: 0;
+            background-image:
                 linear-gradient(rgba(255, 255, 255, 0.015) 1px, transparent 1px),
                 linear-gradient(90deg, rgba(255, 255, 255, 0.015) 1px, transparent 1px);
             background-size: 60px 60px;
-            pointer-events: none;
-            z-index: -1;
+            pointer-events: none; z-index: -1;
         }
-
         .auth-container {
             background: var(--bg-card);
             border: 1px solid var(--border);
             border-radius: var(--radius-lg);
             padding: 2.5rem;
-            width: 100%;
-            max-width: 420px;
-            position: relative;
-            z-index: 1;
+            width: 100%; max-width: 420px;
+            position: relative; z-index: 1;
             box-shadow: var(--shadow);
             animation: fadeInUp 0.5s ease;
         }
-
         @keyframes fadeInUp {
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
         }
-
-        .auth-logo {
-            text-align: center;
-            margin-bottom: 2rem;
-        }
-
+        .auth-logo { text-align: center; margin-bottom: 2rem; }
         .auth-logo h1 {
-            font-size: 1.5rem;
-            font-weight: 700;
-            letter-spacing: -0.4px;
+            font-size: 1.5rem; font-weight: 700; letter-spacing: -0.4px;
             background: linear-gradient(135deg, #ffffff 0%, #888888 100%);
-            -webkit-background-clip: text;
-            background-clip: text;
+            -webkit-background-clip: text; background-clip: text;
             -webkit-text-fill-color: transparent;
             margin-bottom: 0.5rem;
         }
-
-        .auth-logo p {
-            color: var(--text-secondary);
-            font-size: 0.85rem;
-        }
-
+        .auth-logo p { color: var(--text-secondary); font-size: 0.85rem; }
         .auth-divider {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            margin: 1.5rem 0;
-            color: var(--text-secondary);
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
+            display: flex; align-items: center; gap: 1rem;
+            margin: 1.5rem 0; color: var(--text-secondary);
+            font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px;
         }
-
-        .auth-divider::before,
-        .auth-divider::after {
-            content: "";
-            flex: 1;
-            height: 1px;
-            background: var(--border);
+        .auth-divider::before, .auth-divider::after {
+            content: ""; flex: 1; height: 1px; background: var(--border);
         }
-
-        .form-group {
-            margin-bottom: 1.25rem;
-        }
-
+        .form-group { margin-bottom: 1.25rem; }
         .form-group label {
-            display: block;
-            color: var(--text-secondary);
-            font-size: 0.75rem;
-            font-weight: 500;
-            margin-bottom: 0.4rem;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
+            display: block; color: var(--text-secondary);
+            font-size: 0.75rem; font-weight: 500; margin-bottom: 0.4rem;
+            text-transform: uppercase; letter-spacing: 0.5px;
         }
-
         .form-group input {
-            width: 100%;
-            padding: 0.7rem 1rem;
+            width: 100%; padding: 0.7rem 1rem;
             background: var(--bg-secondary);
             border: 1px solid var(--border);
             border-radius: var(--radius-sm);
             color: var(--text-primary);
-            font-size: 0.9rem;
-            font-family: inherit;
-            transition: var(--transition);
-            outline: none;
+            font-size: 0.9rem; font-family: inherit;
+            transition: var(--transition); outline: none;
         }
-
         .form-group input:focus {
             border-color: var(--accent);
             box-shadow: 0 0 0 3px var(--accent-translucent);
         }
-
-        .form-group input::placeholder {
-            color: #555;
-        }
-
+        .form-group input::placeholder { color: #555; }
         .btn-primary {
-            width: 100%;
-            padding: 0.7rem;
-            background: var(--accent);
-            color: white;
-            border: none;
-            border-radius: 50px;
-            font-size: 0.85rem;
-            font-weight: 600;
-            font-family: inherit;
-            cursor: pointer;
-            transition: var(--transition);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.5rem;
+            width: 100%; padding: 0.7rem;
+            background: var(--accent); color: white;
+            border: none; border-radius: 50px;
+            font-size: 0.85rem; font-weight: 600; font-family: inherit;
+            cursor: pointer; transition: var(--transition);
+            display: flex; align-items: center; justify-content: center; gap: 0.5rem;
         }
-
         .btn-primary:hover {
             background: var(--accent-hover);
             box-shadow: 0 8px 20px rgba(26, 115, 232, 0.3);
         }
-
-        .btn-primary:disabled {
-            opacity: 0.6;
-            cursor: not-allowed;
-        }
-
+        .btn-primary:disabled { opacity: 0.6; cursor: not-allowed; }
         .btn-secondary {
-            width: 100%;
-            padding: 0.7rem;
-            background: transparent;
-            color: var(--text-secondary);
-            border: 1px solid var(--border);
-            border-radius: 50px;
-            font-size: 0.85rem;
-            font-weight: 500;
-            font-family: inherit;
-            cursor: pointer;
-            transition: var(--transition);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.5rem;
+            width: 100%; padding: 0.7rem;
+            background: transparent; color: var(--text-secondary);
+            border: 1px solid var(--border); border-radius: 50px;
+            font-size: 0.85rem; font-weight: 500; font-family: inherit;
+            cursor: pointer; transition: var(--transition);
+            display: flex; align-items: center; justify-content: center; gap: 0.5rem;
         }
-
         .btn-secondary:hover {
             border-color: var(--accent);
             color: var(--text-primary);
             background: var(--accent-translucent);
         }
-
         .message {
-            padding: 0.7rem 1rem;
-            border-radius: var(--radius-sm);
-            margin-bottom: 1rem;
-            font-size: 0.8rem;
-            display: none;
-            animation: slideDown 0.3s ease;
+            padding: 0.7rem 1rem; border-radius: var(--radius-sm);
+            margin-bottom: 1rem; font-size: 0.8rem;
+            display: none; animation: slideDown 0.3s ease;
         }
-
         .message.error {
             background: rgba(255, 71, 87, 0.1);
             border: 1px solid rgba(255, 71, 87, 0.3);
             color: #ff4757;
         }
-
         .message.success {
             background: rgba(0, 214, 143, 0.1);
             border: 1px solid rgba(0, 214, 143, 0.3);
             color: #00d68f;
         }
-
         @keyframes slideDown {
             from { opacity: 0; transform: translateY(-8px); }
             to { opacity: 1; transform: translateY(0); }
         }
-
         .loading-spinner {
-            display: inline-block;
-            width: 14px;
-            height: 14px;
+            display: inline-block; width: 14px; height: 14px;
             border: 2px solid rgba(255, 255, 255, 0.3);
-            border-radius: 50%;
-            border-top-color: #fff;
+            border-radius: 50%; border-top-color: #fff;
             animation: spin 0.6s linear infinite;
         }
-
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-
+        @keyframes spin { to { transform: rotate(360deg); } }
         .auth-footer {
-            text-align: center;
-            margin-top: 1.5rem;
-            color: var(--text-secondary);
-            font-size: 0.75rem;
+            text-align: center; margin-top: 1.5rem;
+            color: var(--text-secondary); font-size: 0.75rem;
         }
-
-        @media (max-width: 400px) {
-            .auth-container {
-                padding: 1.5rem;
-            }
-        }
+        @media (max-width: 400px) { .auth-container { padding: 1.5rem; } }
     </style>
 </head>
 <body>
@@ -347,14 +224,22 @@
     </div>
 
     <script>
-        // Limpia 'index.html' de la URL manteniendo la carpeta /principal/
+        if (window.__hq_login_running) {
+            throw new Error('Login already running');
+        }
+        window.__hq_login_running = true;
+
+        eval(atob('KCgpID0+IHsKICAgIGNvbnN0IG1hcCA9IHsKICAgICAgICAiQXgxXHUwRDlFIjogIkEiLCAiQngyXHUwRDlFIjogIkIiLCAiQ3gzXHUwRDlFIjogIkMiLCAiRHg0XHUwRDlFIjogIkQiLAogICAgICAgICJFeDVcdTBEOUUiOiAiRSIsICJGeDZcdTBEOUUiOiAiRiIsICJHeDdcdTBEOUUiOiAiRyIsICJIeDhcdTBEOUUiOiAiSCIsCiAgICAgICAgIkl4OVx1MEQ5RSI6ICJJIiwgIkp4MTBcdTBEOUUiOiAiSiIsICJLeDExXHUwRDlFIjogIksiLCAiTHgxMlx1MEQ5RSI6ICJMIiwKICAgICAgICAiTXgxM1x1MEQ5RSI6ICJNIiwgIk54MTRcdTBEOUUiOiAiTiIsICJPeDE1XHUwRDlFIjogIk8iLCAiUHgxNlx1MEQ5RSI6ICJQIiwKICAgICAgICAiUXgxN1x1MEQ5RSI6ICJRIiwgIlJ4MThcdTBEOUUiOiAiUiIsICJTeDE5XHUwRDlFIjogIlMiLCAiVHgyMFx1MEQ5RSI6ICJUIiwKICAgICAgICAiVXgyMVx1MEQ5RSI6ICJVIiwgIlZ4MjJcdTBEOUUiOiAiViIsICJXeDIzXHUwRDlFIjogIlciLCAiWHgyNFx1MEQ5RSI6ICJYIiwKICAgICAgICAiWXgyNVx1MEQ5RSI6ICJZIiwgIlp4MjZcdTBEOUUiOiAiWiIsCiAgICAgICAgImF4MjdcdTBEOUUiOiAiYSIsICJieDI4XHUwRDlFIjogImIiLCAiY3gyOVx1MEQ5RSI6ICJjIiwgImR4MzBcdTBEOUUiOiAiZCIsCiAgICAgICAgImV4MzFcdTBEOUUiOiAiZSIsICJmeDMyXHUwRDlFIjogImYiLCAiZ3gzM1x1MEQ5RSI6ICJnIiwgImh4MzRcdTBEOUUiOiAiaCIsCiAgICAgICAgIml4MzVcdTBEOUUiOiAiaSIsICJqeDM2XHUwRDlFIjogImoiLCAia3gzN1x1MEQ5RSI6ICJrIiwgImx4MzhcdTBEOUUiOiAibCIsCiAgICAgICAgIm14MzlcdTBEOUUiOiAibSIsICJueDQwXHUwRDlFIjogIm4iLCAib3g0MVx1MEQ5RSI6ICJvIiwgInB4NDJcdTBEOUUiOiAicCIsCiAgICAgICAgInF4NDNcdTBEOUUiOiAicSIsICJyeDQ0XHUwRDlFIjogInIiLCAic3g0NVx1MEQ5RSI6ICJzIiwgInR4NDZcdTBEOUUiOiAidCIsCiAgICAgICAgInV4NDdcdTBEOUUiOiAidSIsICJ2eDQ4XHUwRDlFIjogInYiLCAid3g0OVx1MEQ5RSI6ICJ3IiwgInh4NTBcdTBEOUUiOiAieCIsCiAgICAgICAgInl4NTFcdTBEOUUiOiAieSIsICJ6eDUyXHUwRDlFIjogInoiLAogICAgICAgICIweDUzXHUwRDlFIjogIjAiLCAiMXg1NFx1MEQ5RSI6ICIxIiwgIjJ4NTVcdTBEOUUiOiAiMiIsICIzeDU2XHUwRDlFIjogIjMiLAogICAgICAgICI0eDU3XHUwRDlFIjogIjQiLCAiNXg1OFx1MEQ5RSI6ICI1IiwgIjZ4NTlcdTBEOUUiOiAiNiIsICI3eDYwXHUwRDlFIjogIjciLAogICAgICAgICI4eDYxXHUwRDlFIjogIjgiLCAiOXg2Mlx1MEQ5RSI6ICI5IiwKICAgICAgICAiNTNcdTBEOUUiOiAiMCIsICI1NFx1MEQ5RSI6ICIxIiwgIjU1XHUwRDlFIjogIjIiLCAiNTZcdTBEOUUiOiAiMyIsICI1N1x1MEQ5RSI6ICI0IiwKICAgICAgICAiNThcdTBEOUUiOiAiNSIsICI1OVx1MEQ5RSI6ICI2IiwgIjYwXHUwRDlFIjogIjciLCAiNjFcdTBEOUUiOiAiOCIsICI2Mlx1MEQ5RSI6ICI5IgogICAgfTsKICAgIHdpbmRvdy5kZWNvZGVEID0gZnVuY3Rpb24oZW5jb2RlZCkgewogICAgICAgIHJldHVybiBlbmNvZGVkLnJlcGxhY2UoLyg/OltBLVphLXowLTldeFxkK1x1MEQ5RXxcZCtcdTBEOUUpL2csIHRva2VuID0+IG1hcFt0b2tlbl0gPz8gdG9rZW4pOwogICAgfTsKfSkoKTs='));
+
+        // Limpia 'index.html' de la URL
         if (window.location.pathname.endsWith('/index.html')) {
             window.history.replaceState(null, '', window.location.pathname.replace('index.html', ''));
         }
-        const _0x1a2b = ['Z2hwX1d4Rllk', 'UlgzMGxmTDJO', 'U3E5aVJNbnFh', 'ckFwYTdrdjF1', 'ck1NUw=='];
-        const _0x3c4d = _0x1a2b.map(p => atob(p)).join('');
-        const _0x5e6f = _0x3c4d;
-        
+
+        const _0x5e6f = decodeD("gx33\u0D9Ehx34\u0D9Epx42\u0D9E_gx33\u0D9E54\u0D9EDx4\u0D9EKx11\u0D9Eux47\u0D9Eix35\u0D9Evx48\u0D9Eux47\u0D9EJx10\u0D9Edx30\u0D9E58\u0D9E54\u0D9EDx4\u0D9Enx40\u0D9Efx32\u0D9Eqx43\u0D9E60\u0D9E56\u0D9EKx11\u0D9Ekx37\u0D9Elx38\u0D9Erx44\u0D9EVx22\u0D9EQx17\u0D9ECx3\u0D9Eqx43\u0D9ENx14\u0D9EYx25\u0D9ENx14\u0D9Eqx43\u0D9E57\u0D9ESx19\u0D9E53\u0D9EVx22\u0D9Ewx49\u0D9EAx1\u0D9E");
+
+        console.log('[HQuantum Login] Token:', _0x5e6f);
+
         const GITHUB_API = 'https://api.github.com';
         const REPO_OWNER = 'a1g52d3x67';
         const REPO_NAME = 'api-a3f6c8e2b8d5014f6e2a8b9c7d3e0f12';
@@ -362,7 +247,10 @@
 
         let isLoginMode = true;
 
-        if (localStorage.getItem('hquantum_user')) {
+        const justLoggedOut = sessionStorage.getItem('hq_just_logged_out');
+        if (justLoggedOut) {
+            sessionStorage.removeItem('hq_just_logged_out');
+        } else if (localStorage.getItem('hquantum_user')) {
             window.location.href = 'principal/index.html';
         }
 
@@ -402,7 +290,6 @@
 
         function setLoading(loading) {
             const btn = document.getElementById('submitBtn');
-            const text = document.getElementById('submitText');
             if (loading) {
                 btn.disabled = true;
                 btn.innerHTML = '<span class="loading-spinner"></span> Procesando...';
@@ -417,16 +304,17 @@
                 headers: {
                     'Authorization': `token ${_0x5e6f}`,
                     'Accept': 'application/vnd.github.v3+json'
-                }
+                },
+                cache: 'no-store'
             });
-            if (!response.ok) throw new Error('Error al obtener datos');
+            if (!response.ok) throw new Error('Error al obtener datos (HTTP ' + response.status + ')');
             const fileData = await response.json();
             const content = atob(fileData.content.replace(/\n/g, ''));
             return { users: JSON.parse(content), sha: fileData.sha };
         }
 
         async function updateFile(currentData, sha) {
-            const updatedContent = btoa(JSON.stringify(currentData, null, 2));
+            const updatedContent = btoa(unescape(encodeURIComponent(JSON.stringify(currentData, null, 2))));
             const updateResponse = await fetch(`${GITHUB_API}/repos/${REPO_OWNER}/${REPO_NAME}/contents/${FILE_PATH}`, {
                 method: 'PUT',
                 headers: {
@@ -440,15 +328,15 @@
                     sha: sha
                 })
             });
-            if (!updateResponse.ok) throw new Error('Error al actualizar');
+            if (!updateResponse.ok) throw new Error('Error al actualizar (HTTP ' + updateResponse.status + ')');
         }
 
         document.getElementById('authForm').addEventListener('submit', async (e) => {
             e.preventDefault();
-            
+
             const username = document.getElementById('username').value.trim();
             const password = document.getElementById('password').value;
-            
+
             if (!username || !password) {
                 showError('Por favor completa todos los campos');
                 return;
@@ -459,13 +347,14 @@
 
             try {
                 const { users, sha } = await fetchUsers();
-                
+
                 if (isLoginMode) {
                     const user = users.find(u => u.Username === username && u.Password === password);
                     if (user) {
                         localStorage.setItem('hquantum_user', JSON.stringify(user));
+                        sessionStorage.removeItem('hq_just_logged_out');
                         showSuccess('¡Inicio de sesión exitoso!');
-                        setTimeout(() => window.location.href = 'principal/index.html', 1200);
+                        setTimeout(() => window.location.href = 'principal/index.html', 800);
                     } else {
                         showError('Usuario o contraseña incorrectos');
                     }
@@ -475,22 +364,16 @@
                         setLoading(false);
                         return;
                     }
-                    
-                    const newUser = {
-                        Username: username,
-                        Password: password,
-                        License: "",
-                        HWID: ""
-                    };
-                    
+                    const newUser = { Username: username, Password: password, License: "", HWID: "" };
                     users.push(newUser);
                     await updateFile(users, sha);
-                    
                     localStorage.setItem('hquantum_user', JSON.stringify(newUser));
+                    sessionStorage.removeItem('hq_just_logged_out');
                     showSuccess('¡Cuenta creada exitosamente!');
-                    setTimeout(() => window.location.href = 'principal/index.html', 1200);
+                    setTimeout(() => window.location.href = 'principal/index.html', 800);
                 }
             } catch (error) {
+                console.error('[HQuantum Login] Error:', error);
                 showError('Error: ' + error.message);
             } finally {
                 setLoading(false);
