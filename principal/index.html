@@ -27,6 +27,8 @@
             --radius-md: 16px;
             --radius-lg: 24px;
             --transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+            --success: #00d68f;
+            --danger: #ff4757;
         }
         * { margin: 0; padding: 0; box-sizing: border-box; }
         html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
@@ -168,31 +170,37 @@
         .app-section {
             background: var(--bg-card); border-radius: var(--radius-lg); padding: 2.5rem;
             border: 1px solid var(--border); text-align: center;
-            max-width: 700px; margin: 0 auto; position: relative; overflow: hidden;
+            max-width: 750px; margin: 0 auto; position: relative; overflow: hidden;
         }
         .app-section::before {
             content: ""; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
-            background: radial-gradient(circle, rgba(26,115,232,0.05) 0%, transparent 60%);
+            background: radial-gradient(circle, rgba(26,115,232,0.08) 0%, transparent 60%);
             pointer-events: none;
         }
         .app-icon {
-            width: 80px; height: 80px; border-radius: 20px; background: var(--accent-translucent);
+            width: 90px; height: 90px; border-radius: 22px; background: var(--accent-translucent);
             display: flex; align-items: center; justify-content: center;
-            margin: 0 auto 1.5rem; color: var(--accent-hover); font-size: 2rem;
+            margin: 0 auto 1.5rem; color: var(--accent-hover); font-size: 2.2rem;
             border: 1px solid rgba(26,115,232,0.3);
         }
-        .app-title { font-size: 1.5rem; font-weight: 700; margin-bottom: 0.25rem; letter-spacing: -0.4px; }
-        .app-version { color: var(--accent-hover); font-size: 0.85rem; font-weight: 600; margin-bottom: 1rem; letter-spacing: 0.5px; }
+        .app-os-badge {
+            display: inline-flex; align-items: center; gap: 0.5rem;
+            background: linear-gradient(135deg, rgba(26,115,232,0.2), rgba(26,115,232,0.05));
+            border: 1px solid rgba(26,115,232,0.4);
+            padding: 0.5rem 1.2rem; border-radius: 50px;
+            font-size: 1.05rem; font-weight: 700; letter-spacing: 0.5px;
+            margin-bottom: 1.25rem; color: var(--accent-hover);
+        }
+        .app-title { font-size: 1.6rem; font-weight: 800; margin-bottom: 1rem; letter-spacing: -0.5px; }
         .app-desc {
             color: var(--text-secondary); font-size: 0.95rem; line-height: 1.8;
-            margin-bottom: 2rem; max-width: 550px; margin-left: auto; margin-right: auto;
+            margin-bottom: 2rem; max-width: 600px; margin-left: auto; margin-right: auto;
         }
         .app-desc strong { color: var(--text-primary); font-weight: 600; }
-        .app-buttons { display: flex; flex-wrap: wrap; gap: 0.75rem; justify-content: center; }
         .btn-download {
             display: inline-flex; align-items: center; gap: 0.75rem;
-            padding: 0.9rem 2rem; background: var(--accent); color: white;
-            border: none; border-radius: 50px; font-size: 0.95rem; font-weight: 600;
+            padding: 0.9rem 2.5rem; background: var(--accent); color: white;
+            border: none; border-radius: 50px; font-size: 1rem; font-weight: 600;
             font-family: inherit; cursor: pointer; transition: var(--transition);
             text-decoration: none; position: relative; overflow: hidden;
         }
@@ -207,21 +215,10 @@
             box-shadow: 0 10px 30px rgba(26,115,232,0.4);
             transform: translateY(-2px);
         }
-        .btn-download i { font-size: 1.05rem; }
-        .btn-secondary {
-            display: inline-flex; align-items: center; gap: 0.75rem;
-            padding: 0.9rem 2rem; background: transparent; color: var(--text-primary);
-            border: 1px solid var(--border-hover); border-radius: 50px; font-size: 0.95rem;
-            font-weight: 600; font-family: inherit; cursor: pointer; transition: var(--transition);
-            text-decoration: none;
-        }
-        .btn-secondary:hover {
-            background: var(--accent-translucent); border-color: var(--accent);
-            color: var(--accent-hover);
-        }
+        .btn-download i { font-size: 1.1rem; }
         .account-section {
             background: var(--bg-card); border-radius: var(--radius-md); padding: 2rem;
-            border: 1px solid var(--border); max-width: 480px; margin: 0 auto;
+            border: 1px solid var(--border); max-width: 520px; margin: 0 auto;
         }
         .account-header {
             display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem;
@@ -255,15 +252,15 @@
         .btn-primary:hover { background: var(--accent-hover); box-shadow: 0 8px 20px rgba(26,115,232,0.3); }
         .btn-primary:disabled { opacity: 0.6; cursor: not-allowed; }
         .btn-logout {
-            width: 100%; padding: 0.7rem; background: transparent; color: #ff4757;
+            width: 100%; padding: 0.7rem; background: transparent; color: var(--danger);
             border: 1px solid rgba(255,71,87,0.3); border-radius: 50px; font-size: 0.85rem;
             font-weight: 600; font-family: inherit; cursor: pointer; transition: var(--transition); margin-top: 0.75rem;
         }
         .btn-logout:hover { background: rgba(255,71,87,0.1); }
         .btn-danger {
-            width: 100%; padding: 0.7rem; background: transparent; color: #ff4757;
+            width: 100%; padding: 0.7rem; background: transparent; color: var(--danger);
             border: 1px solid rgba(255,71,87,0.4); border-radius: 50px; font-size: 0.85rem;
-            font-weight: 600; font-family: inherit; cursor: pointer; transition: var(--transition); margin-top: 0.75rem;
+            font-weight: 600; font-family: inherit; cursor: pointer; transition: var(--transition);
             display: flex; align-items: center; justify-content: center; gap: 0.5rem;
         }
         .btn-danger:hover { background: rgba(255,71,87,0.15); }
@@ -271,8 +268,8 @@
             padding: 0.7rem 1rem; border-radius: var(--radius-sm); margin-bottom: 1rem;
             font-size: 0.8rem; display: none; animation: slideDown 0.3s ease;
         }
-        .message.error { background: rgba(255,71,87,0.1); border: 1px solid rgba(255,71,87,0.3); color: #ff4757; }
-        .message.success { background: rgba(0,214,143,0.1); border: 1px solid rgba(0,214,143,0.3); color: #00d68f; }
+        .message.error { background: rgba(255,71,87,0.1); border: 1px solid rgba(255,71,87,0.3); color: var(--danger); }
+        .message.success { background: rgba(0,214,143,0.1); border: 1px solid rgba(0,214,143,0.3); color: var(--success); }
         .license-status {
             display: flex; align-items: center; gap: 0.75rem; padding: 0.75rem 1rem;
             border-radius: var(--radius-sm); margin-bottom: 1rem;
@@ -280,13 +277,11 @@
         }
         .license-status i { color: var(--accent-hover); font-size: 1.2rem; }
         .license-status.active { border-color: rgba(0,214,143,0.3); background: rgba(0,214,143,0.05); }
-        .license-status.active i { color: #00d68f; }
-        .license-status.expired { border-color: rgba(255,71,87,0.3); background: rgba(255,71,87,0.05); }
-        .license-status.expired i { color: #ff4757; }
+        .license-status.active i { color: var(--success); }
         .license-purchase {
             text-align: center; padding: 2rem; background: var(--bg-card);
             border-radius: var(--radius-lg); border: 1px solid var(--border);
-            max-width: 420px; margin: 0 auto;
+            max-width: 440px; margin: 0 auto;
         }
         .license-product-img {
             width: 150px; height: 150px; object-fit: contain;
@@ -307,59 +302,70 @@
             box-shadow: 0 10px 25px rgba(26,115,232,0.4);
             transform: translateY(-2px);
         }
-        .license-info-row {
-            display: flex; justify-content: space-between; align-items: center;
-            padding: 0.65rem 1rem; background: var(--bg-secondary);
-            border: 1px solid var(--border); border-radius: var(--radius-sm);
-            margin-bottom: 0.6rem; font-size: 0.82rem;
+        /* Info grid para Keys */
+        .info-grid {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; margin-bottom: 1.25rem;
         }
-        .license-info-row span:first-child { color: var(--text-secondary); }
-        .license-info-row span:last-child { color: var(--text-primary); font-weight: 600; }
+        .info-item {
+            background: var(--bg-secondary); border: 1px solid var(--border);
+            border-radius: var(--radius-sm); padding: 0.85rem 1rem;
+        }
+        .info-item .label {
+            font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.5px;
+            color: var(--text-secondary); margin-bottom: 0.3rem; display: block;
+        }
+        .info-item .value {
+            font-size: 0.9rem; font-weight: 600; color: var(--text-primary);
+            word-break: break-all;
+        }
+        .info-item.full { grid-column: 1 / -1; }
+        .info-item.accent .value { color: var(--accent-hover); }
+        .info-item.success .value { color: var(--success); }
+        .info-item.danger .value { color: var(--danger); }
+        .days-badge {
+            display: inline-flex; align-items: center; gap: 0.4rem;
+            padding: 0.35rem 0.8rem; border-radius: 50px; font-size: 0.75rem; font-weight: 600;
+            margin-bottom: 1rem;
+        }
+        .days-badge.ok { background: rgba(0,214,143,0.12); color: var(--success); border: 1px solid rgba(0,214,143,0.3); }
+        .days-badge.warn { background: rgba(255,193,7,0.12); color: #ffc107; border: 1px solid rgba(255,193,7,0.3); }
+        .days-badge.expired { background: rgba(255,71,87,0.12); color: var(--danger); border: 1px solid rgba(255,71,87,0.3); }
+        .keys-section { max-width: 560px; margin: 0 auto; }
+        /* Términos */
+        .terms-content h3 {
+            font-size: 1rem; font-weight: 700; margin: 1.5rem 0 0.6rem;
+            color: var(--text-primary);
+        }
+        .terms-content h3:first-child { margin-top: 0; }
+        .terms-content p, .terms-content li {
+            color: var(--text-secondary); font-size: 0.88rem; line-height: 1.75;
+            margin-bottom: 0.5rem;
+        }
+        .terms-content ul { padding-left: 1.25rem; margin-bottom: 1rem; }
+        .terms-content strong { color: var(--text-primary); }
+        .terms-badge {
+            display: inline-flex; align-items: center; gap: 0.5rem;
+            background: var(--accent-translucent); border: 1px solid rgba(26,115,232,0.3);
+            padding: 0.4rem 1rem; border-radius: 50px; font-size: 0.8rem; font-weight: 600;
+            color: var(--accent-hover); margin-bottom: 1.25rem;
+        }
+        /* Link términos en footer */
         .footer-profesional {
             margin-top: 2rem; background: var(--bg-secondary); border-top: 1px solid var(--border);
             padding: 1.5rem; text-align: center; color: var(--text-secondary); font-size: 0.8rem;
         }
-        .footer-links {
-            display: flex; justify-content: center; gap: 1rem; margin-bottom: 0.5rem; flex-wrap: wrap;
+        .footer-profesional .footer-links {
+            display: flex; justify-content: center; gap: 1.5rem; margin-bottom: 0.75rem;
+            flex-wrap: wrap;
         }
-        .footer-links button {
-            background: transparent; border: none; color: var(--text-secondary);
-            font-family: inherit; font-size: 0.8rem; cursor: pointer; transition: var(--transition);
-            text-decoration: underline; text-underline-offset: 3px;
+        .footer-profesional .footer-links button {
+            background: none; border: none; color: var(--text-secondary);
+            font-family: inherit; font-size: 0.8rem; cursor: pointer;
+            transition: var(--transition); padding: 0.25rem 0;
         }
-        .footer-links button:hover { color: var(--accent-hover); }
+        .footer-profesional .footer-links button:hover { color: var(--accent-hover); }
         @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
         @keyframes slideDown { from { opacity: 0; transform: translateY(-8px); } to { opacity: 1; transform: translateY(0); } }
-
-        /* Modal genérico */
-        .modal-overlay {
-            position: fixed; inset: 0; background: rgba(0,0,0,0.75);
-            backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
-            z-index: 5000; display: none; align-items: center; justify-content: center;
-            padding: 1rem;
-        }
-        .modal-overlay.open { display: flex; }
-        .modal-box {
-            background: var(--bg-card); border: 1px solid var(--border-hover);
-            border-radius: var(--radius-lg); max-width: 560px; width: 100%;
-            max-height: 85vh; overflow-y: auto; padding: 2rem;
-            box-shadow: var(--shadow); animation: fadeInUp 0.25s ease;
-            position: relative;
-        }
-        .modal-box h2 { font-size: 1.3rem; font-weight: 700; margin-bottom: 1rem; letter-spacing: -0.3px; }
-        .modal-box h3 { font-size: 1rem; font-weight: 600; margin: 1.25rem 0 0.5rem; color: var(--accent-hover); }
-        .modal-box p { color: var(--text-secondary); font-size: 0.85rem; line-height: 1.7; margin-bottom: 0.75rem; }
-        .modal-box ul { color: var(--text-secondary); font-size: 0.85rem; line-height: 1.7; margin: 0 0 0.75rem 1.2rem; }
-        .modal-close {
-            position: absolute; top: 1rem; right: 1rem; background: var(--bg-secondary);
-            border: 1px solid var(--border); color: var(--text-secondary); border-radius: 50%;
-            width: 34px; height: 34px; cursor: pointer; transition: var(--transition);
-            display: flex; align-items: center; justify-content: center;
-        }
-        .modal-close:hover { background: var(--accent-translucent); color: var(--text-primary); }
-        .modal-actions { display: flex; gap: 0.6rem; margin-top: 1.25rem; }
-        .modal-actions button { flex: 1; }
-
         @media (max-width: 768px) {
             .hamburger { display: block; }
             .nav-links {
@@ -378,7 +384,7 @@
             .banner-slide img { height: 180px; }
             .app-section { padding: 1.5rem; }
             .license-product-img { width: 120px; height: 120px; }
-            .modal-box { padding: 1.5rem; }
+            .info-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -400,8 +406,6 @@
             <div class="nav-links" id="navLinks" role="navigation">
                 <button class="nav-link active" data-section="inicio"><i class="fas fa-home"></i> Inicio</button>
                 <button class="nav-link" data-section="app"><i class="fas fa-download"></i> Aplicación</button>
-                <button class="nav-link" data-section="videos"><i class="fas fa-play"></i> Videos</button>
-                <button class="nav-link" data-section="resultados"><i class="fas fa-chart-bar"></i> Resultados</button>
                 <button class="nav-link" data-section="keys"><i class="fas fa-key"></i> Keys</button>
                 <button class="nav-link" data-section="account"><i class="fas fa-user"></i> Cuenta</button>
             </div>
@@ -414,77 +418,12 @@
 
     <footer class="footer-profesional" id="footerContent" style="display:none;">
         <div class="footer-links">
-            <button onclick="openModal('termsModal')">Términos de Seguridad</button>
-            <button onclick="openModal('privacyModal')">Política de Privacidad</button>
+            <button onclick="renderSection('terminos')">Términos y Condiciones</button>
+            <button onclick="renderSection('privacidad')">Política de Privacidad</button>
+            <button onclick="renderSection('seguridad')">Seguridad</button>
         </div>
         <span>© 2026 HQuantum Tweaks — Optimización Profesional</span>
     </footer>
-
-    <!-- MODAL: Términos de Seguridad -->
-    <div class="modal-overlay" id="termsModal">
-        <div class="modal-box">
-            <button class="modal-close" onclick="closeModal('termsModal')" aria-label="Cerrar"><i class="fas fa-times"></i></button>
-            <h2><i class="fas fa-shield-halved" style="color:var(--accent-hover);margin-right:0.5rem;"></i>Términos de Seguridad</h2>
-            <p>En <strong>HQuantum Tweaks</strong> la seguridad de tu equipo y de tu cuenta es prioridad absoluta. Al usar nuestros servicios aceptas las siguientes condiciones:</p>
-            <h3>1. Uso legítimo</h3>
-            <p>Las optimizaciones están diseñadas exclusivamente para mejorar el rendimiento de sistemas Windows. Queda prohibido su uso para actividades ilícitas, malware o manipulación de terceros.</p>
-            <h3>2. Integridad del software</h3>
-            <p>Todos los tweaks son verificados antes de publicarse. No instalamos backdoors, mineros ni software espía. La aplicación se distribuye únicamente desde nuestros canales oficiales.</p>
-            <h3>3. Licencias</h3>
-            <p>Cada licencia es personal e intransferible. El uso indebido o la compartición de claves puede resultar en la revocación inmediata sin reembolso.</p>
-            <h3>4. Responsabilidad</h3>
-            <p>Aunque nuestros tweaks son seguros, toda modificación del sistema conlleva un riesgo mínimo. Recomendamos crear un punto de restauración antes de aplicar cambios. HQuantum no se hace responsable de daños derivados de un uso indebido.</p>
-            <h3>5. Actualizaciones</h3>
-            <p>Podemos actualizar estos términos en cualquier momento. El uso continuado del servicio implica la aceptación de la versión vigente.</p>
-            <div class="modal-actions">
-                <button class="btn-primary" onclick="closeModal('termsModal')">Entendido</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- MODAL: Política de Privacidad -->
-    <div class="modal-overlay" id="privacyModal">
-        <div class="modal-box">
-            <button class="modal-close" onclick="closeModal('privacyModal')" aria-label="Cerrar"><i class="fas fa-times"></i></button>
-            <h2><i class="fas fa-lock" style="color:var(--accent-hover);margin-right:0.5rem;"></i>Política de Privacidad</h2>
-            <p>Tu privacidad es importante. Esta política explica qué datos recogemos y cómo los tratamos:</p>
-            <h3>1. Datos que recogemos</h3>
-            <ul>
-                <li><strong>Usuario y contraseña</strong>: almacenados de forma cifrada en nuestra base de datos para autenticación.</li>
-                <li><strong>Licencia y fecha de caducidad</strong>: para gestionar el acceso a las optimizaciones premium.</li>
-                <li><strong>HWID</strong>: identificador del hardware para vincular la licencia a tu equipo (opcional).</li>
-            </ul>
-            <h3>2. Finalidad</h3>
-            <p>Los datos se usan exclusivamente para autenticar tu cuenta, validar tu licencia y ofrecer soporte. Nunca se venden ni se comparten con terceros.</p>
-            <h3>3. Almacenamiento</h3>
-            <p>La información se guarda en un repositorio privado de GitHub. Solo el equipo de HQuantum tiene acceso administrativo.</p>
-            <h3>4. Tus derechos</h3>
-            <p>Puedes solicitar la eliminación de tu cuenta y datos asociados contactando con soporte. También puedes desvincular tu licencia en cualquier momento desde la sección <em>Keys</em>.</p>
-            <h3>5. Cookies</h3>
-            <p>No usamos cookies de seguimiento. Solo almacenamos tu sesión en <code>localStorage</code> para mantenerte autenticado mientras navegas.</p>
-            <div class="modal-actions">
-                <button class="btn-primary" onclick="closeModal('privacyModal')">Entendido</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- MODAL: Confirmar desvinculación -->
-    <div class="modal-overlay" id="unlinkModal">
-        <div class="modal-box">
-            <button class="modal-close" onclick="closeModal('unlinkModal')" aria-label="Cerrar"><i class="fas fa-times"></i></button>
-            <h2><i class="fas fa-triangle-exclamation" style="color:#ff4757;margin-right:0.5rem;"></i>Desvincular Key</h2>
-            <p><strong>¿Estás seguro que quieres desvincular tu Key?</strong> Si lo haces tendrás que volver a comprar una. Esta acción no se puede deshacer.</p>
-            <div class="message error" id="unlinkError"></div>
-            <div class="form-group" style="text-align:left;">
-                <label>Confirma tu contraseña</label>
-                <input type="password" id="unlinkPassword" placeholder="••••••••">
-            </div>
-            <div class="modal-actions">
-                <button class="btn-secondary" style="flex:1;" onclick="closeModal('unlinkModal')">Cancelar</button>
-                <button class="btn-danger" style="flex:1;margin:0;" onclick="confirmUnlink()">Desvincular</button>
-            </div>
-        </div>
-    </div>
 
     <script>
         if (window.__hq_index_running) {
@@ -507,8 +446,8 @@
         const REPO_NAME = 'api-a3f6c8e2b8d5014f6e2a8b9c7d3e0f12';
         const FILE_PATH = 'db.json';
         const LICENSE_FILE_PATH = 'x9w4q7.json';
-        const APP_ISO_URL = ''; // ⬅️ "descarga": "yo pongo luego" (pon aquí el enlace de la ISO)
-        const APP_DOWNLOAD_URL = ''; // ⬅️ "descarga": "yo pongo luego" (pon aquí el enlace del instalador)
+        // 🔧 CONFIG: aquí pones luego el enlace de descarga de QuantumOS
+        const APP_DOWNLOAD_URL = 'yo pongo luego';
         const PAYPAL_URL = 'https://www.paypal.com/ncp/payment/NNFD22L7HHBR6';
         const LICENSE_PRODUCT_IMG = 'f4df2274-2494-403a-a5e2-f891b455f134-removebg-preview.png';
 
@@ -519,43 +458,81 @@
 
         let currentUser = null;
 
-        /* ---------- Utilidades de fecha (España) ---------- */
-        function getSpainNow() {
-            // Devuelve un objeto Date "equivalente" a la hora de España (Europe/Madrid)
-            const now = new Date();
-            const spainString = now.toLocaleString('en-US', { timeZone: 'Europe/Madrid' });
-            return new Date(spainString);
+        /* ============================================================
+           UTILIDADES DE FECHA (Zona horaria España)
+           ============================================================ */
+
+        // Devuelve un objeto { year, month (1-12), day } correspondiente
+        // a la fecha actual en España (Europe/Madrid).
+        function getMadridToday() {
+            const parts = new Intl.DateTimeFormat('en-CA', {
+                timeZone: 'Europe/Madrid',
+                year: 'numeric', month: '2-digit', day: '2-digit'
+            }).formatToParts(new Date());
+            const get = (t) => parseInt(parts.find(p => p.type === t).value, 10);
+            return { year: get('year'), month: get('month'), day: get('day') };
         }
 
-        function formatSpainDate(date) {
-            // Formato: DD/MM/YYYY HH:mm (hora España)
-            const d = new Date(date);
-            const day = String(d.getDate()).padStart(2, '0');
-            const month = String(d.getMonth() + 1).padStart(2, '0');
-            const year = d.getFullYear();
-            const hours = String(d.getHours()).padStart(2, '0');
-            const minutes = String(d.getMinutes()).padStart(2, '0');
-            return `${day}/${month}/${year} ${hours}:${minutes}`;
+        // Suma N meses a una fecha {year, month, day} y fija la hora a 00:00.
+        // Gestiona correctamente el desbordamiento de meses (ej. 31 enero + 1 mes → 28/29 feb).
+        function addMonthsAtMidnight(dateObj, months) {
+            let { year, month, day } = dateObj;
+            // Normalizamos: month index 0-11
+            const totalMonthIndex = (year * 12 + (month - 1)) + months;
+            const newYear = Math.floor(totalMonthIndex / 12);
+            const newMonth = (totalMonthIndex % 12) + 1;
+            // Día máximo del mes destino
+            const maxDay = new Date(newYear, newMonth, 0).getDate();
+            const newDay = Math.min(day, maxDay);
+            return { year: newYear, month: newMonth, day: newDay };
         }
 
-        function computeExpirationOneMonth() {
-            // 1 mes exacto desde ahora, fijado a las 00:00 hora España
-            const spainNow = getSpainNow();
-            const exp = new Date(spainNow);
-            exp.setMonth(exp.getMonth() + 1);
-            exp.setHours(0, 0, 0, 0);
-            // Devolvemos en formato ISO-like local de España para guardar en JSON
-            return exp.toISOString();
+        // Formatea {year, month, day} como "YYYY-MM-DD 00:00"
+        function formatDateISO(dateObj) {
+            const y = dateObj.year;
+            const m = String(dateObj.month).padStart(2, '0');
+            const d = String(dateObj.day).padStart(2, '0');
+            return `${y}-${m}-${d} 00:00`;
         }
 
+        // Calcula la fecha de expiración: hoy (España) + 1 mes, a las 00:00
+        function computeExpirationTime() {
+            const today = getMadridToday();
+            const next = addMonthsAtMidnight(today, 1);
+            return formatDateISO(next);
+        }
+
+        // Parsea "YYYY-MM-DD 00:00" a Date local (mediodía para evitar líos de TZ)
+        function parseExpiration(timeStr) {
+            if (!timeStr) return null;
+            const m = String(timeStr).match(/^(\d{4})-(\d{2})-(\d{2})/);
+            if (!m) return null;
+            // Usamos mediodía UTC del día indicado; para comparar días es suficiente
+            return new Date(Date.UTC(parseInt(m[1],10), parseInt(m[2],10)-1, parseInt(m[3],10), 12, 0, 0));
+        }
+
+        // Días restantes (puede ser negativo si expiró)
+        function daysRemaining(timeStr) {
+            const exp = parseExpiration(timeStr);
+            if (!exp) return null;
+            // Hoy en Madrid a mediodía (UTC)
+            const todayParts = getMadridToday();
+            const todayUTC = Date.UTC(todayParts.year, todayParts.month - 1, todayParts.day, 12, 0, 0);
+            const diffMs = exp.getTime() - todayUTC;
+            return Math.ceil(diffMs / (1000 * 60 * 60 * 24));
+        }
+
+        // Devuelve true si la licencia está expirada
         function isLicenseExpired(timeStr) {
-            if (!timeStr) return false; // sin fecha => no caduca (o se gestiona aparte)
-            const exp = new Date(timeStr);
-            if (isNaN(exp.getTime())) return false;
-            return getSpainNow().getTime() > exp.getTime();
+            if (!timeStr) return false; // sin fecha => no expira (o no aplica)
+            const remaining = daysRemaining(timeStr);
+            return remaining !== null && remaining < 0;
         }
 
-        /* ---------- GitHub helpers ---------- */
+        /* ============================================================
+           GITHUB API
+           ============================================================ */
+
         async function fetchFile(path) {
             const response = await fetch(`${GITHUB_API}/repos/${REPO_OWNER}/${REPO_NAME}/contents/${path}`, {
                 headers: {
@@ -588,7 +565,10 @@
             if (!updateResponse.ok) throw new Error('HTTP ' + updateResponse.status + ' al actualizar ' + path);
         }
 
-        /* ---------- Sesión ---------- */
+        /* ============================================================
+           SESIÓN
+           ============================================================ */
+
         async function validateSession() {
             const storedUser = localStorage.getItem('hquantum_user');
             if (!storedUser) {
@@ -624,7 +604,9 @@
                     Password: dbUser.Password,
                     License: dbUser.License || "",
                     Time: dbUser.Time || "",
-                    HWID: dbUser.HWID || ""
+                    UUID: dbUser.UUID || "",
+                    HWID: dbUser.UUID || dbUser.HWID || "",
+                    IP: dbUser["IP Adress"] || ""
                 };
                 localStorage.setItem('hquantum_user', JSON.stringify(currentUser));
                 return true;
@@ -636,7 +618,9 @@
                     Password: parsedUser.Password,
                     License: parsedUser.License || "",
                     Time: parsedUser.Time || "",
-                    HWID: parsedUser.HWID || ""
+                    UUID: parsedUser.UUID || "",
+                    HWID: parsedUser.UUID || parsedUser.HWID || "",
+                    IP: parsedUser.IP || ""
                 };
                 return true;
             }
@@ -650,11 +634,13 @@
                 if (!dbUser || dbUser.License !== currentUser.License) {
                     currentUser.License = "";
                     currentUser.Time = "";
+                    currentUser.UUID = "";
                     localStorage.setItem('hquantum_user', JSON.stringify(currentUser));
                     return false;
                 }
-                // sincronizar Time
-                if (dbUser.Time) currentUser.Time = dbUser.Time;
+                // Sincronizar Time y UUID por si cambiaron
+                currentUser.Time = dbUser.Time || "";
+                currentUser.UUID = dbUser.UUID || "";
                 localStorage.setItem('hquantum_user', JSON.stringify(currentUser));
                 return true;
             } catch (error) {
@@ -663,23 +649,10 @@
             }
         }
 
-        /* ---------- Modales ---------- */
-        window.openModal = function(id) {
-            const el = document.getElementById(id);
-            if (el) el.classList.add('open');
-        };
-        window.closeModal = function(id) {
-            const el = document.getElementById(id);
-            if (el) el.classList.remove('open');
-        };
-        // Cerrar al hacer clic en el fondo
-        document.querySelectorAll('.modal-overlay').forEach(overlay => {
-            overlay.addEventListener('click', (e) => {
-                if (e.target === overlay) overlay.classList.remove('open');
-            });
-        });
+        /* ============================================================
+           RENDER: INICIO
+           ============================================================ */
 
-        /* ---------- Render: Inicio ---------- */
         function renderInicio() {
             mainArea.innerHTML = `
                 <div class="banner-ad-container">
@@ -739,74 +712,47 @@
             setInterval(() => goToSlide((currentIndex + 1) % 2), 5000);
         }
 
-        /* ---------- Render: Aplicación ---------- */
+        /* ============================================================
+           RENDER: APLICACIÓN (QuantumOS / ISO)
+           ============================================================ */
+
         function renderApp() {
             mainArea.innerHTML = `
                 <div class="app-section">
-                    <div class="app-icon"><i class="fas fa-rocket"></i></div>
-                    <h2 class="app-title">QuantumOS</h2>
-                    <div class="app-version">QuantumOS 10 22H2 v1.3</div>
+                    <div class="app-icon"><i class="fas fa-compact-disc"></i></div>
+                    <div class="app-os-badge">
+                        <i class="fas fa-layer-group"></i> ISO
+                    </div>
+                    <h2 class="app-title">QuantumOS 10 22H2 v1.3</h2>
                     <p class="app-desc">
-                        <strong>QuantumOS</strong> es un sistema optimizado para sacar el mejor rendimiento del juego con muchos ajustes que valen la pena al <strong>100x100</strong>, aparte de su soporte mensual, actualizaciones que recibirá cada tiempo, parches, etc.
+                        <strong>QuantumOS</strong> es un sistema operativo optimizado para sacar el
+                        <strong>mejor rendimiento del juego</strong> con muchos ajustes que valen la pena
+                        al <strong>100×100</strong>. Además, cuenta con <strong>soporte mensual</strong>
+                        y actualizaciones periódicas: recibirás <strong>parches, mejoras y correcciones</strong>
+                        de forma continua para mantener tu equipo siempre al máximo.
                         <br><br>
-                        Una experiencia <strong>ultra fluida</strong>, estabilidad excepcional y tweaks de élite para dominar en cualquier título competitivo.
+                        Una experiencia limpia, estable y brutalmente rápida — diseñada para que cada
+                        milisegundo cuente en tus partidas.
                     </p>
-                    <div class="app-buttons">
-                        <a href="${APP_ISO_URL || '#'}" class="btn-secondary" ${APP_ISO_URL ? 'download' : 'onclick="event.preventDefault();alert(\\'ISO disponible próximamente\\')"'}>
-                            <i class="fas fa-compact-disc"></i> Descargar ISO
-                        </a>
-                        <a href="${APP_DOWNLOAD_URL || '#'}" class="btn-download" ${APP_DOWNLOAD_URL ? 'download' : 'onclick="event.preventDefault();alert(\\'Descarga disponible próximamente\\')"'}>
-                            <i class="fas fa-download"></i> Descargar
-                        </a>
-                    </div>
+                    <a href="${APP_DOWNLOAD_URL}" class="btn-download" download>
+                        <i class="fas fa-download"></i> Descargar
+                    </a>
                 </div>
             `;
         }
 
-        /* ---------- Render: Videos ---------- */
-        function renderVideos() {
-            mainArea.innerHTML = `
-                <div class="tweaks-grid">
-                    <div class="tweak-card">
-                        <div class="tweak-icon"><i class="fab fa-youtube"></i></div>
-                        <h3 class="tweak-title">Guía de Optimización</h3>
-                        <p class="tweak-desc">Cómo los profesionales optimizan Windows para aumentar FPS.</p>
-                    </div>
-                    <div class="tweak-card">
-                        <div class="tweak-icon"><i class="fas fa-video"></i></div>
-                        <h3 class="tweak-title">Regedit Avanzado</h3>
-                        <p class="tweak-desc">Mejora tu latencia con tweaks avanzados de registro.</p>
-                    </div>
-                    <div class="tweak-card">
-                        <div class="tweak-icon"><i class="fas fa-film"></i></div>
-                        <h3 class="tweak-title">FPS Boost</h3>
-                        <p class="tweak-desc">Aumenta FPS con configuraciones exclusivas.</p>
-                    </div>
-                </div>
-            `;
-        }
+        /* ============================================================
+           RENDER: KEYS
+           ============================================================ */
 
-        /* ---------- Render: Resultados ---------- */
-        function renderResultados() {
-            mainArea.innerHTML = `
-                <div class="about-section">
-                    <h2 class="about-title">Resultados</h2>
-                    <p class="about-text">Próximamente mostraremos resultados de rendimiento con gráficos comparativos.</p>
-                </div>
-            `;
-        }
-
-        /* ---------- Render: Keys ---------- */
         function renderKeys() {
             const hasLicense = currentUser.License && currentUser.License !== "";
-            const expired = hasLicense && currentUser.Time && isLicenseExpired(currentUser.Time);
-
             if (!hasLicense) {
                 mainArea.innerHTML = `
                     <div class="license-purchase">
                         <img src="${LICENSE_PRODUCT_IMG}" alt="Licencia HQuantum" class="license-product-img">
                         <h3 class="license-product-title">Licencia de HQuantum Tweaks</h3>
-                        <p class="license-product-desc">Obtén acceso completo a todas las optimizaciones premium</p>
+                        <p class="license-product-desc">Obtén acceso completo a todas las optimizaciones premium durante 1 mes</p>
                         <a href="${PAYPAL_URL}" target="_blank" class="btn-purchase">
                             <i class="fab fa-paypal"></i> Comprar Licencia
                         </a>
@@ -824,56 +770,57 @@
                     </div>
                 `;
             } else {
-                const statusClass = expired ? 'expired' : 'active';
-                const statusIcon = expired ? 'fa-circle-xmark' : 'fa-check-circle';
-                const statusText = expired ? 'Licencia caducada' : 'Licencia activa';
-                const timeFormatted = currentUser.Time ? formatSpainDate(currentUser.Time) : 'Sin fecha';
+                const timeStr = currentUser.Time || "—";
+                const remaining = daysRemaining(currentUser.Time);
+                const expired = isLicenseExpired(currentUser.Time);
+
+                let badgeClass = 'ok';
+                let badgeText = 'Licencia activa';
+                if (remaining !== null) {
+                    if (remaining < 0) { badgeClass = 'expired'; badgeText = `Expirada hace ${Math.abs(remaining)} día(s)`; }
+                    else if (remaining <= 5) { badgeClass = 'warn'; badgeText = `Expira en ${remaining} día(s)`; }
+                    else { badgeClass = 'ok'; badgeText = `Quedan ${remaining} día(s)`; }
+                }
 
                 mainArea.innerHTML = `
-                    <div class="account-section" style="max-width:520px;">
-                        <div class="account-header">
-                            <div class="account-avatar"><i class="fas fa-key"></i></div>
-                            <div class="account-info">
-                                <h3>Tu Licencia</h3>
-                                <p>Gestiona tu acceso premium</p>
+                    <div class="keys-section">
+                        <div class="account-section">
+                            <div class="account-header">
+                                <div class="account-avatar"><i class="fas fa-key"></i></div>
+                                <div class="account-info">
+                                    <h3>Licencia Activa</h3>
+                                    <p>Información de tu key</p>
+                                </div>
                             </div>
-                        </div>
 
-                        <div class="license-status ${statusClass}">
-                            <i class="fas ${statusIcon}"></i>
-                            <span>${statusText}</span>
-                        </div>
+                            <span class="days-badge ${badgeClass}">
+                                <i class="fas fa-clock"></i> ${badgeText}
+                            </span>
 
-                        <div class="license-info-row">
-                            <span><i class="fas fa-barcode" style="margin-right:0.4rem;"></i> Clave</span>
-                            <span>${currentUser.License}</span>
-                        </div>
-                        <div class="license-info-row">
-                            <span><i class="fas fa-calendar-day" style="margin-right:0.4rem;"></i> Válida hasta</span>
-                            <span>${timeFormatted}</span>
-                        </div>
-                        <div class="license-info-row">
-                            <span><i class="fas fa-microchip" style="margin-right:0.4rem;"></i> HWID</span>
-                            <span>${currentUser.HWID ? currentUser.HWID.substring(0,12)+'...' : 'No vinculado'}</span>
-                        </div>
+                            <div class="info-grid">
+                                <div class="info-item full accent">
+                                    <span class="label">Key</span>
+                                    <span class="value">${currentUser.License}</span>
+                                </div>
+                                <div class="info-item">
+                                    <span class="label">Activación</span>
+                                    <span class="value">${currentUser.Time ? 'Registrada' : '—'}</span>
+                                </div>
+                                <div class="info-item ${expired ? 'danger' : 'success'}">
+                                    <span class="label">Fecha de caducidad</span>
+                                    <span class="value">${timeStr}</span>
+                                </div>
+                                <div class="info-item full">
+                                    <span class="label">UUID / HWID</span>
+                                    <span class="value">${currentUser.UUID || currentUser.HWID || 'No asignado'}</span>
+                                </div>
+                            </div>
 
-                        <div style="margin-top:1.5rem; padding-top:1rem; border-top:1px solid var(--border);">
-                            <p style="color:var(--text-secondary); font-size:0.78rem; margin-bottom:0.75rem;">
-                                <i class="fas fa-circle-info"></i> La licencia se renueva automáticamente cada mes. Si desvinculas la Key, perderás el acceso y tendrás que comprar una nueva.
-                            </p>
-                            <button class="btn-danger" onclick="openUnlinkModal()">
-                                <i class="fas fa-link-slash"></i> Desvincular Key
-                            </button>
-                        </div>
+                            <div class="message error" id="keyError"></div>
+                            <div class="message success" id="keySuccess"></div>
 
-                        <div style="margin-top:1rem;">
-                            <button class="btn-secondary" style="width:100%; justify-content:center;" onclick="openModal('termsModal')">
-                                <i class="fas fa-shield-halved"></i> Términos de Seguridad
-                            </button>
-                        </div>
-                        <div style="margin-top:0.5rem;">
-                            <button class="btn-secondary" style="width:100%; justify-content:center;" onclick="openModal('privacyModal')">
-                                <i class="fas fa-lock"></i> Política de Privacidad
+                            <button class="btn-danger" onclick="confirmUnlinkKey()">
+                                <i class="fas fa-unlink"></i> Desvincular Key
                             </button>
                         </div>
                     </div>
@@ -881,7 +828,10 @@
             }
         }
 
-        /* ---------- Activar licencia ---------- */
+        /* ============================================================
+           ACTIVAR LICENCIA
+           ============================================================ */
+
         window.activateLicense = async function() {
             const licenseKey = document.getElementById('licenseKey').value.trim();
             if (!licenseKey) {
@@ -893,14 +843,13 @@
             btn.innerHTML = '<span style="width:14px;height:14px;border:2px solid rgba(255,255,255,0.3);border-radius:50%;border-top-color:#fff;animation:spin 0.6s linear infinite;display:inline-block;"></span> Verificando...';
             try {
                 const { data: licenses, sha: licenseSha } = await fetchFile(LICENSE_FILE_PATH);
-                const licenseObj = licenses.find(l => l.License === licenseKey);
-                if (!licenseObj) {
+                const licenseExists = licenses.some(l => l.License === licenseKey);
+                if (!licenseExists) {
                     showKeyMessage('keyError', 'Licencia inválida o ya utilizada');
                     btn.disabled = false;
                     btn.innerHTML = '<i class="fas fa-check"></i> Activar Licencia';
                     return;
                 }
-
                 const { data: users, sha: usersSha } = await fetchFile(FILE_PATH);
                 const userIndex = users.findIndex(u => u.Username === currentUser.Username);
                 if (userIndex === -1) {
@@ -910,26 +859,25 @@
                     return;
                 }
 
-                // Calcular fecha de expiración: 1 mes desde ahora, 00:00 hora España
-                const expirationISO = computeExpirationOneMonth();
-
-                // Si la key en el JSON ya trae un Time, lo respetamos; si no, usamos el calculado
-                const finalTime = (licenseObj.Time && licenseObj.Time.trim() !== '') ? licenseObj.Time : expirationISO;
+                // Calcular fecha de caducidad: hoy (España) + 1 mes a las 00:00
+                const expirationTime = computeExpirationTime();
 
                 users[userIndex].License = licenseKey;
-                users[userIndex].Time = finalTime;
-                users[userIndex].HWID = users[userIndex].HWID || ''; // mantener HWID si existe
+                users[userIndex].Time = expirationTime;
+                // Conservar UUID si ya existía, sino dejar que otro flujo lo asigne
+                if (!users[userIndex].UUID) users[userIndex].UUID = "";
 
-                await updateFile(FILE_PATH, users, usersSha, 'Activate license with Time');
+                await updateFile(FILE_PATH, users, usersSha, 'Activate license');
 
                 const updatedLicenses = licenses.filter(l => l.License !== licenseKey);
                 await updateFile(LICENSE_FILE_PATH, updatedLicenses, licenseSha, 'Remove used license');
 
                 currentUser.License = licenseKey;
-                currentUser.Time = finalTime;
+                currentUser.Time = expirationTime;
+                currentUser.UUID = users[userIndex].UUID || "";
                 localStorage.setItem('hquantum_user', JSON.stringify(currentUser));
 
-                showKeyMessage('keySuccess', '¡Licencia activada exitosamente!');
+                showKeyMessage('keySuccess', `¡Licencia activada! Caduca el ${expirationTime}`);
                 setTimeout(() => renderKeys(), 1500);
             } catch (error) {
                 showKeyMessage('keyError', 'Error: ' + error.message);
@@ -938,74 +886,66 @@
             }
         };
 
+        /* ============================================================
+           DESVINCULAR KEY
+           ============================================================ */
+
+        window.confirmUnlinkKey = function() {
+            const confirmMsg = '¿Estás seguro que quieres desvincular tu Key? Si lo haces tendrás que volver a comprar una.';
+            if (!window.confirm(confirmMsg)) return;
+            // Pedir contraseña
+            const pwd = window.prompt('Introduce tu contraseña para confirmar la desvinculación:');
+            if (pwd === null) return; // canceló
+            if (!pwd) {
+                showKeyMessage('keyError', 'Debes introducir tu contraseña');
+                return;
+            }
+            doUnlinkKey(pwd);
+        };
+
+        async function doUnlinkKey(password) {
+            try {
+                const { data: users, sha } = await fetchFile(FILE_PATH);
+                const userIndex = users.findIndex(u => u.Username === currentUser.Username);
+                if (userIndex === -1) {
+                    showKeyMessage('keyError', 'Usuario no encontrado');
+                    return;
+                }
+                if (users[userIndex].Password !== password) {
+                    showKeyMessage('keyError', 'Contraseña incorrecta');
+                    return;
+                }
+
+                users[userIndex].License = "";
+                users[userIndex].Time = "";
+                users[userIndex].UUID = "";
+
+                await updateFile(FILE_PATH, users, sha, 'Unlink license');
+
+                currentUser.License = "";
+                currentUser.Time = "";
+                currentUser.UUID = "";
+                localStorage.setItem('hquantum_user', JSON.stringify(currentUser));
+
+                showKeyMessage('keySuccess', 'Key desvinculada correctamente');
+                setTimeout(() => renderKeys(), 1200);
+            } catch (error) {
+                showKeyMessage('keyError', 'Error: ' + error.message);
+            }
+        }
+
         function showKeyMessage(id, text) {
             const el = document.getElementById(id);
             if (!el) return;
             el.textContent = text;
             el.style.display = 'block';
-            setTimeout(() => { el.style.display = 'none'; }, 4000);
+            setTimeout(() => { el.style.display = 'none'; }, 4500);
         }
 
-        /* ---------- Desvincular Key ---------- */
-        window.openUnlinkModal = function() {
-            const errEl = document.getElementById('unlinkError');
-            if (errEl) errEl.style.display = 'none';
-            const pwdInput = document.getElementById('unlinkPassword');
-            if (pwdInput) pwdInput.value = '';
-            openModal('unlinkModal');
-        };
+        /* ============================================================
+           RENDER: CUENTA
+           ============================================================ */
 
-        window.confirmUnlink = async function() {
-            const password = document.getElementById('unlinkPassword').value;
-            const errEl = document.getElementById('unlinkError');
-            if (!password) {
-                errEl.textContent = 'Debes ingresar tu contraseña';
-                errEl.style.display = 'block';
-                return;
-            }
-            if (password !== currentUser.Password) {
-                errEl.textContent = 'Contraseña incorrecta';
-                errEl.style.display = 'block';
-                return;
-            }
-
-            const btn = document.querySelector('#unlinkModal .btn-danger');
-            btn.disabled = true;
-            btn.innerHTML = '<span style="width:14px;height:14px;border:2px solid rgba(255,255,255,0.3);border-radius:50%;border-top-color:#fff;animation:spin 0.6s linear infinite;display:inline-block;"></span> Procesando...';
-
-            try {
-                const { data: users, sha } = await fetchFile(FILE_PATH);
-                const userIndex = users.findIndex(u => u.Username === currentUser.Username);
-                if (userIndex === -1) {
-                    errEl.textContent = 'Usuario no encontrado';
-                    errEl.style.display = 'block';
-                    btn.disabled = false;
-                    btn.innerHTML = 'Desvincular';
-                    return;
-                }
-
-                users[userIndex].License = '';
-                users[userIndex].Time = '';
-                users[userIndex].HWID = '';
-
-                await updateFile(FILE_PATH, users, sha, 'Unlink license');
-
-                currentUser.License = '';
-                currentUser.Time = '';
-                currentUser.HWID = '';
-                localStorage.setItem('hquantum_user', JSON.stringify(currentUser));
-
-                closeModal('unlinkModal');
-                renderKeys();
-            } catch (error) {
-                errEl.textContent = 'Error: ' + error.message;
-                errEl.style.display = 'block';
-                btn.disabled = false;
-                btn.innerHTML = 'Desvincular';
-            }
-        };
-
-        /* ---------- Render: Cuenta ---------- */
         function renderAccount() {
             mainArea.innerHTML = `
                 <div class="account-section">
@@ -1077,17 +1017,123 @@
             window.location.href = '../index.html';
         };
 
-        /* ---------- Navegación ---------- */
+        /* ============================================================
+           RENDER: TÉRMINOS / PRIVACIDAD / SEGURIDAD
+           ============================================================ */
+
+        function renderTerminos() {
+            mainArea.innerHTML = `
+                <div class="about-section">
+                    <div class="terms-badge"><i class="fas fa-file-contract"></i> Documento legal</div>
+                    <h2 class="about-title">Términos y Condiciones</h2>
+                    <div class="about-text terms-content">
+                        <h3>1. Uso del servicio</h3>
+                        <p>Al adquirir y utilizar una licencia de <strong>HQuantum Tweaks</strong>, aceptas estos términos en su totalidad. La licencia es <strong>personal e intransferible</strong> y está vinculada a un único usuario y equipo (UUID/HWID).</p>
+
+                        <h3>2. Duración y renovación</h3>
+                        <p>Cada licencia tiene una duración de <strong>1 mes</strong> desde su activación, calculada según la zona horaria de España (Europe/Madrid) y finalizando a las <strong>00:00</strong> del día correspondiente. La renovación es opcional y deberá realizarse antes de la fecha de caducidad para evitar interrupciones.</p>
+
+                        <h3>3. Desvinculación</h3>
+                        <p>El usuario puede <strong>desvincular su key</strong> en cualquier momento desde el panel. Esta acción es <strong>irreversible</strong>: una vez desvinculada, la key queda invalidada y será necesario <strong>adquirir una nueva licencia</strong> para volver a utilizar el servicio.</p>
+
+                        <h3>4. Prohibiciones</h3>
+                        <ul>
+                            <li>Compartir, revender o redistribuir la key.</li>
+                            <li>Intentar eludir el sistema de licencias o el HWID.</li>
+                            <li>Usar el software para fines ilícitos.</li>
+                        </ul>
+
+                        <h3>5. Limitación de responsabilidad</h3>
+                        <p>HQuantum Tweaks no se hace responsable de daños derivados de un uso indebido del software. Las optimizaciones se aplican bajo responsabilidad del usuario, quien debe realizar copias de seguridad antes de su uso.</p>
+
+                        <h3>6. Modificaciones</h3>
+                        <p>Nos reservamos el derecho a modificar estos términos. Los cambios se publicarán en esta misma página y entrarán en vigor desde su publicación.</p>
+                    </div>
+                </div>
+            `;
+        }
+
+        function renderPrivacidad() {
+            mainArea.innerHTML = `
+                <div class="about-section">
+                    <div class="terms-badge"><i class="fas fa-shield-alt"></i> Privacidad</div>
+                    <h2 class="about-title">Política de Privacidad</h2>
+                    <div class="about-text terms-content">
+                        <h3>1. Datos que recopilamos</h3>
+                        <p>Para el correcto funcionamiento del sistema de licencias, almacenamos:</p>
+                        <ul>
+                            <li><strong>Nombre de usuario</strong> y contraseña (cifrada).</li>
+                            <li><strong>UUID / HWID</strong> del equipo donde se activa la licencia.</li>
+                            <li><strong>Dirección IP</strong> de registro/acceso.</li>
+                            <li><strong>Fecha de activación y caducidad</strong> de la licencia.</li>
+                        </ul>
+
+                        <h3>2. Finalidad</h3>
+                        <p>Estos datos se utilizan exclusivamente para <strong>gestionar la licencia</strong>, prevenir fraudes y garantizar que cada key se use en un único dispositivo.</p>
+
+                        <h3>3. Almacenamiento</h3>
+                        <p>Los datos se almacenan en un repositorio privado de GitHub mediante la API oficial. El acceso está restringido mediante token y no se comparten con terceros.</p>
+
+                        <h3>4. Derechos del usuario</h3>
+                        <p>Puedes solicitar la <strong>eliminación de tus datos</strong> contactando con soporte. Ten en cuenta que la eliminación de la cuenta implica la pérdida de la licencia asociada.</p>
+
+                        <h3>5. Cookies y sesión</h3>
+                        <p>Utilizamos <strong>localStorage</strong> para mantener la sesión iniciada en tu navegador. No empleamos cookies de rastreo ni publicidad.</p>
+                    </div>
+                </div>
+            `;
+        }
+
+        function renderSeguridad() {
+            mainArea.innerHTML = `
+                <div class="about-section">
+                    <div class="terms-badge"><i class="fas fa-lock"></i> Seguridad</div>
+                    <h2 class="about-title">Seguridad del Sistema</h2>
+                    <div class="about-text terms-content">
+                        <h3>1. Protección de credenciales</h3>
+                        <p>Las contraseñas se almacenan de forma segura y nunca se muestran en texto plano fuera del panel de cuenta. El inicio de sesión se valida contra la base de datos remota en cada carga.</p>
+
+                        <h3>2. Vinculación por HWID</h3>
+                        <p>Cada licencia se vincula a un <strong>UUID único</strong> generado a partir de identificadores del equipo. Esto impide el uso simultáneo de la misma key en múltiples dispositivos.</p>
+
+                        <h3>3. Comunicaciones</h3>
+                        <p>Todas las peticiones a la API se realizan sobre <strong>HTTPS</strong>. El token de acceso está encapsulado y ofuscado para dificultar su extracción.</p>
+
+                        <h3>4. Recomendaciones al usuario</h3>
+                        <ul>
+                            <li>No compartas tu contraseña ni tu key con nadie.</li>
+                            <li>Usa una contraseña robusta y única.</li>
+                            <li>Cierra sesión si accedes desde un equipo público.</li>
+                            <li>Mantén tu sistema actualizado.</li>
+                        </ul>
+
+                        <h3>5. Reporte de vulnerabilidades</h3>
+                        <p>Si detectas un fallo de seguridad, repórtalo de forma responsable a través de los canales de contacto. Tu colaboración nos ayuda a mantener el servicio seguro.</p>
+                    </div>
+                </div>
+            `;
+        }
+
+        /* ============================================================
+           NAVEGACIÓN
+           ============================================================ */
+
         function renderSection(section) {
+            // Marcar nav-link activo si existe
+            document.querySelectorAll('.nav-link').forEach(b => {
+                b.classList.toggle('active', b.dataset.section === section);
+            });
             switch(section) {
                 case 'app': renderApp(); break;
-                case 'videos': renderVideos(); break;
-                case 'resultados': renderResultados(); break;
                 case 'keys': renderKeys(); break;
                 case 'account': renderAccount(); break;
+                case 'terminos': renderTerminos(); break;
+                case 'privacidad': renderPrivacidad(); break;
+                case 'seguridad': renderSeguridad(); break;
                 default: renderInicio();
             }
         }
+        window.renderSection = renderSection;
 
         hamburgerBtn.addEventListener('click', () => {
             const isOpen = navLinks.classList.toggle('open');
@@ -1103,7 +1149,10 @@
             });
         });
 
-        /* ---------- Init ---------- */
+        /* ============================================================
+           INIT
+           ============================================================ */
+
         async function init() {
             try {
                 const isValid = await validateSession();
