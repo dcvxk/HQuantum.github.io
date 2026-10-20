@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes, viewport-fit=cover">
     <title>HQuantum Tweaks</title>
-    <link rel="icon" type="image/x-icon" href="../icon1.ico">
+    <link rel="icon" type="image/x-icon" href="icon1.ico">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
@@ -181,16 +181,18 @@
             margin: 0 auto 1.5rem; color: var(--accent-hover); font-size: 2rem;
             border: 1px solid rgba(26,115,232,0.3);
         }
-        .app-title { font-size: 1.5rem; font-weight: 700; margin-bottom: 1rem; letter-spacing: -0.4px; }
+        .app-title { font-size: 1.5rem; font-weight: 700; margin-bottom: 0.25rem; letter-spacing: -0.4px; }
+        .app-version { color: var(--accent-hover); font-size: 0.85rem; font-weight: 600; margin-bottom: 1rem; letter-spacing: 0.5px; }
         .app-desc {
             color: var(--text-secondary); font-size: 0.95rem; line-height: 1.8;
             margin-bottom: 2rem; max-width: 550px; margin-left: auto; margin-right: auto;
         }
         .app-desc strong { color: var(--text-primary); font-weight: 600; }
+        .app-buttons { display: flex; flex-wrap: wrap; gap: 0.75rem; justify-content: center; }
         .btn-download {
             display: inline-flex; align-items: center; gap: 0.75rem;
-            padding: 0.9rem 2.5rem; background: var(--accent); color: white;
-            border: none; border-radius: 50px; font-size: 1rem; font-weight: 600;
+            padding: 0.9rem 2rem; background: var(--accent); color: white;
+            border: none; border-radius: 50px; font-size: 0.95rem; font-weight: 600;
             font-family: inherit; cursor: pointer; transition: var(--transition);
             text-decoration: none; position: relative; overflow: hidden;
         }
@@ -205,7 +207,18 @@
             box-shadow: 0 10px 30px rgba(26,115,232,0.4);
             transform: translateY(-2px);
         }
-        .btn-download i { font-size: 1.1rem; }
+        .btn-download i { font-size: 1.05rem; }
+        .btn-secondary {
+            display: inline-flex; align-items: center; gap: 0.75rem;
+            padding: 0.9rem 2rem; background: transparent; color: var(--text-primary);
+            border: 1px solid var(--border-hover); border-radius: 50px; font-size: 0.95rem;
+            font-weight: 600; font-family: inherit; cursor: pointer; transition: var(--transition);
+            text-decoration: none;
+        }
+        .btn-secondary:hover {
+            background: var(--accent-translucent); border-color: var(--accent);
+            color: var(--accent-hover);
+        }
         .account-section {
             background: var(--bg-card); border-radius: var(--radius-md); padding: 2rem;
             border: 1px solid var(--border); max-width: 480px; margin: 0 auto;
@@ -247,6 +260,13 @@
             font-weight: 600; font-family: inherit; cursor: pointer; transition: var(--transition); margin-top: 0.75rem;
         }
         .btn-logout:hover { background: rgba(255,71,87,0.1); }
+        .btn-danger {
+            width: 100%; padding: 0.7rem; background: transparent; color: #ff4757;
+            border: 1px solid rgba(255,71,87,0.4); border-radius: 50px; font-size: 0.85rem;
+            font-weight: 600; font-family: inherit; cursor: pointer; transition: var(--transition); margin-top: 0.75rem;
+            display: flex; align-items: center; justify-content: center; gap: 0.5rem;
+        }
+        .btn-danger:hover { background: rgba(255,71,87,0.15); }
         .message {
             padding: 0.7rem 1rem; border-radius: var(--radius-sm); margin-bottom: 1rem;
             font-size: 0.8rem; display: none; animation: slideDown 0.3s ease;
@@ -261,10 +281,12 @@
         .license-status i { color: var(--accent-hover); font-size: 1.2rem; }
         .license-status.active { border-color: rgba(0,214,143,0.3); background: rgba(0,214,143,0.05); }
         .license-status.active i { color: #00d68f; }
+        .license-status.expired { border-color: rgba(255,71,87,0.3); background: rgba(255,71,87,0.05); }
+        .license-status.expired i { color: #ff4757; }
         .license-purchase {
             text-align: center; padding: 2rem; background: var(--bg-card);
             border-radius: var(--radius-lg); border: 1px solid var(--border);
-            max-width: 400px; margin: 0 auto;
+            max-width: 420px; margin: 0 auto;
         }
         .license-product-img {
             width: 150px; height: 150px; object-fit: contain;
@@ -285,14 +307,59 @@
             box-shadow: 0 10px 25px rgba(26,115,232,0.4);
             transform: translateY(-2px);
         }
+        .license-info-row {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 0.65rem 1rem; background: var(--bg-secondary);
+            border: 1px solid var(--border); border-radius: var(--radius-sm);
+            margin-bottom: 0.6rem; font-size: 0.82rem;
+        }
+        .license-info-row span:first-child { color: var(--text-secondary); }
+        .license-info-row span:last-child { color: var(--text-primary); font-weight: 600; }
         .footer-profesional {
             margin-top: 2rem; background: var(--bg-secondary); border-top: 1px solid var(--border);
             padding: 1.5rem; text-align: center; color: var(--text-secondary); font-size: 0.8rem;
         }
-        .footer-profesional a { color: var(--text-secondary); text-decoration: none; }
-        .footer-profesional a:hover { color: var(--text-primary); }
+        .footer-links {
+            display: flex; justify-content: center; gap: 1rem; margin-bottom: 0.5rem; flex-wrap: wrap;
+        }
+        .footer-links button {
+            background: transparent; border: none; color: var(--text-secondary);
+            font-family: inherit; font-size: 0.8rem; cursor: pointer; transition: var(--transition);
+            text-decoration: underline; text-underline-offset: 3px;
+        }
+        .footer-links button:hover { color: var(--accent-hover); }
         @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
         @keyframes slideDown { from { opacity: 0; transform: translateY(-8px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* Modal genérico */
+        .modal-overlay {
+            position: fixed; inset: 0; background: rgba(0,0,0,0.75);
+            backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+            z-index: 5000; display: none; align-items: center; justify-content: center;
+            padding: 1rem;
+        }
+        .modal-overlay.open { display: flex; }
+        .modal-box {
+            background: var(--bg-card); border: 1px solid var(--border-hover);
+            border-radius: var(--radius-lg); max-width: 560px; width: 100%;
+            max-height: 85vh; overflow-y: auto; padding: 2rem;
+            box-shadow: var(--shadow); animation: fadeInUp 0.25s ease;
+            position: relative;
+        }
+        .modal-box h2 { font-size: 1.3rem; font-weight: 700; margin-bottom: 1rem; letter-spacing: -0.3px; }
+        .modal-box h3 { font-size: 1rem; font-weight: 600; margin: 1.25rem 0 0.5rem; color: var(--accent-hover); }
+        .modal-box p { color: var(--text-secondary); font-size: 0.85rem; line-height: 1.7; margin-bottom: 0.75rem; }
+        .modal-box ul { color: var(--text-secondary); font-size: 0.85rem; line-height: 1.7; margin: 0 0 0.75rem 1.2rem; }
+        .modal-close {
+            position: absolute; top: 1rem; right: 1rem; background: var(--bg-secondary);
+            border: 1px solid var(--border); color: var(--text-secondary); border-radius: 50%;
+            width: 34px; height: 34px; cursor: pointer; transition: var(--transition);
+            display: flex; align-items: center; justify-content: center;
+        }
+        .modal-close:hover { background: var(--accent-translucent); color: var(--text-primary); }
+        .modal-actions { display: flex; gap: 0.6rem; margin-top: 1.25rem; }
+        .modal-actions button { flex: 1; }
+
         @media (max-width: 768px) {
             .hamburger { display: block; }
             .nav-links {
@@ -311,6 +378,7 @@
             .banner-slide img { height: 180px; }
             .app-section { padding: 1.5rem; }
             .license-product-img { width: 120px; height: 120px; }
+            .modal-box { padding: 1.5rem; }
         }
     </style>
 </head>
@@ -345,13 +413,78 @@
     </div>
 
     <footer class="footer-profesional" id="footerContent" style="display:none;">
+        <div class="footer-links">
+            <button onclick="openModal('termsModal')">Términos de Seguridad</button>
+            <button onclick="openModal('privacyModal')">Política de Privacidad</button>
+        </div>
         <span>© 2026 HQuantum Tweaks — Optimización Profesional</span>
-        <span style="display:block;margin-top:.5rem;font-size:.7rem;">
-            <a href="../terminos.html">Términos</a> ·
-            <a href="../privacidad.html">Privacidad</a> ·
-            <a href="mailto:contacto@hquantum.tld">Contacto</a>
-        </span>
     </footer>
+
+    <!-- MODAL: Términos de Seguridad -->
+    <div class="modal-overlay" id="termsModal">
+        <div class="modal-box">
+            <button class="modal-close" onclick="closeModal('termsModal')" aria-label="Cerrar"><i class="fas fa-times"></i></button>
+            <h2><i class="fas fa-shield-halved" style="color:var(--accent-hover);margin-right:0.5rem;"></i>Términos de Seguridad</h2>
+            <p>En <strong>HQuantum Tweaks</strong> la seguridad de tu equipo y de tu cuenta es prioridad absoluta. Al usar nuestros servicios aceptas las siguientes condiciones:</p>
+            <h3>1. Uso legítimo</h3>
+            <p>Las optimizaciones están diseñadas exclusivamente para mejorar el rendimiento de sistemas Windows. Queda prohibido su uso para actividades ilícitas, malware o manipulación de terceros.</p>
+            <h3>2. Integridad del software</h3>
+            <p>Todos los tweaks son verificados antes de publicarse. No instalamos backdoors, mineros ni software espía. La aplicación se distribuye únicamente desde nuestros canales oficiales.</p>
+            <h3>3. Licencias</h3>
+            <p>Cada licencia es personal e intransferible. El uso indebido o la compartición de claves puede resultar en la revocación inmediata sin reembolso.</p>
+            <h3>4. Responsabilidad</h3>
+            <p>Aunque nuestros tweaks son seguros, toda modificación del sistema conlleva un riesgo mínimo. Recomendamos crear un punto de restauración antes de aplicar cambios. HQuantum no se hace responsable de daños derivados de un uso indebido.</p>
+            <h3>5. Actualizaciones</h3>
+            <p>Podemos actualizar estos términos en cualquier momento. El uso continuado del servicio implica la aceptación de la versión vigente.</p>
+            <div class="modal-actions">
+                <button class="btn-primary" onclick="closeModal('termsModal')">Entendido</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL: Política de Privacidad -->
+    <div class="modal-overlay" id="privacyModal">
+        <div class="modal-box">
+            <button class="modal-close" onclick="closeModal('privacyModal')" aria-label="Cerrar"><i class="fas fa-times"></i></button>
+            <h2><i class="fas fa-lock" style="color:var(--accent-hover);margin-right:0.5rem;"></i>Política de Privacidad</h2>
+            <p>Tu privacidad es importante. Esta política explica qué datos recogemos y cómo los tratamos:</p>
+            <h3>1. Datos que recogemos</h3>
+            <ul>
+                <li><strong>Usuario y contraseña</strong>: almacenados de forma cifrada en nuestra base de datos para autenticación.</li>
+                <li><strong>Licencia y fecha de caducidad</strong>: para gestionar el acceso a las optimizaciones premium.</li>
+                <li><strong>HWID</strong>: identificador del hardware para vincular la licencia a tu equipo (opcional).</li>
+            </ul>
+            <h3>2. Finalidad</h3>
+            <p>Los datos se usan exclusivamente para autenticar tu cuenta, validar tu licencia y ofrecer soporte. Nunca se venden ni se comparten con terceros.</p>
+            <h3>3. Almacenamiento</h3>
+            <p>La información se guarda en un repositorio privado de GitHub. Solo el equipo de HQuantum tiene acceso administrativo.</p>
+            <h3>4. Tus derechos</h3>
+            <p>Puedes solicitar la eliminación de tu cuenta y datos asociados contactando con soporte. También puedes desvincular tu licencia en cualquier momento desde la sección <em>Keys</em>.</p>
+            <h3>5. Cookies</h3>
+            <p>No usamos cookies de seguimiento. Solo almacenamos tu sesión en <code>localStorage</code> para mantenerte autenticado mientras navegas.</p>
+            <div class="modal-actions">
+                <button class="btn-primary" onclick="closeModal('privacyModal')">Entendido</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL: Confirmar desvinculación -->
+    <div class="modal-overlay" id="unlinkModal">
+        <div class="modal-box">
+            <button class="modal-close" onclick="closeModal('unlinkModal')" aria-label="Cerrar"><i class="fas fa-times"></i></button>
+            <h2><i class="fas fa-triangle-exclamation" style="color:#ff4757;margin-right:0.5rem;"></i>Desvincular Key</h2>
+            <p><strong>¿Estás seguro que quieres desvincular tu Key?</strong> Si lo haces tendrás que volver a comprar una. Esta acción no se puede deshacer.</p>
+            <div class="message error" id="unlinkError"></div>
+            <div class="form-group" style="text-align:left;">
+                <label>Confirma tu contraseña</label>
+                <input type="password" id="unlinkPassword" placeholder="••••••••">
+            </div>
+            <div class="modal-actions">
+                <button class="btn-secondary" style="flex:1;" onclick="closeModal('unlinkModal')">Cancelar</button>
+                <button class="btn-danger" style="flex:1;margin:0;" onclick="confirmUnlink()">Desvincular</button>
+            </div>
+        </div>
+    </div>
 
     <script>
         if (window.__hq_index_running) {
@@ -359,47 +492,23 @@
         }
         window.__hq_index_running = true;
 
-        // ── Ofuscación mínima (sin eval, sin atob) ──
-        (function () {
-            const map = {
-                "Ax1\u0D9E": "A", "Bx2\u0D9E": "B", "Cx3\u0D9E": "C", "Dx4\u0D9E": "D",
-                "Ex5\u0D9E": "E", "Fx6\u0D9E": "F", "Gx7\u0D9E": "G", "Hx8\u0D9E": "H",
-                "Ix9\u0D9E": "I", "Jx10\u0D9E": "J", "Kx11\u0D9E": "K", "Lx12\u0D9E": "L",
-                "Mx13\u0D9E": "M", "Nx14\u0D9E": "N", "Ox15\u0D9E": "O", "Px16\u0D9E": "P",
-                "Qx17\u0D9E": "Q", "Rx18\u0D9E": "R", "Sx19\u0D9E": "S", "Tx20\u0D9E": "T",
-                "Ux21\u0D9E": "U", "Vx22\u0D9E": "V", "Wx23\u0D9E": "W", "Xx24\u0D9E": "X",
-                "Yx25\u0D9E": "Y", "Zx26\u0D9E": "Z",
-                "ax27\u0D9E": "a", "bx28\u0D9E": "b", "cx29\u0D9E": "c", "dx30\u0D9E": "d",
-                "ex31\u0D9E": "e", "fx32\u0D9E": "f", "gx33\u0D9E": "g", "hx34\u0D9E": "h",
-                "ix35\u0D9E": "i", "jx36\u0D9E": "j", "kx37\u0D9E": "k", "lx38\u0D9E": "l",
-                "mx39\u0D9E": "m", "nx40\u0D9E": "n", "ox41\u0D9E": "o", "px42\u0D9E": "p",
-                "qx43\u0D9E": "q", "rx44\u0D9E": "r", "sx45\u0D9E": "s", "tx46\u0D9E": "t",
-                "ux47\u0D9E": "u", "vx48\u0D9E": "v", "wx49\u0D9E": "w", "xx50\u0D9E": "x",
-                "yx51\u0D9E": "y", "zx52\u0D9E": "z",
-                "0x53\u0D9E": "0", "1x54\u0D9E": "1", "2x55\u0D9E": "2", "3x56\u0D9E": "3",
-                "4x57\u0D9E": "4", "5x58\u0D9E": "5", "6x59\u0D9E": "6", "7x60\u0D9E": "7",
-                "8x61\u0D9E": "8", "9x62\u0D9E": "9",
-                "53\u0D9E": "0", "54\u0D9E": "1", "55\u0D9E": "2", "56\u0D9E": "3", "57\u0D9E": "4",
-                "58\u0D9E": "5", "59\u0D9E": "6", "60\u0D9E": "7", "61\u0D9E": "8", "62\u0D9E": "9"
-            };
-            window.decodeD = function (encoded) {
-                return encoded.replace(/(?:[A-Za-z0-9]x\d+\u0D9E|\d+\u0D9E)/g, token => map[token] ?? token);
-            };
-        })();
+        eval(atob('KCgpID0+IHsKICAgIGNvbnN0IG1hcCA9IHsKICAgICAgICAiQXgxXHUwRDlFIjogIkEiLCAiQngyXHUwRDlFIjogIkIiLCAiQ3gzXHUwRDlFIjogIkMiLCAiRHg0XHUwRDlFIjogIkQiLAogICAgICAgICJFeDVcdTBEOUUiOiAiRSIsICJGeDZcdTBEOUUiOiAiRiIsICJHeDdcdTBEOUUiOiAiRyIsICJIeDhcdTBEOUUiOiAiSCIsCiAgICAgICAgIkl4OVx1MEQ5RSI6ICJJIiwgIkp4MTBcdTBEOUUiOiAiSiIsICJLeDExXHUwRDlFIjogIksiLCAiTHgxMlx1MEQ5RSI6ICJMIiwKICAgICAgICAiTXgxM1x1MEQ5RSI6ICJNIiwgIk54MTRcdTBEOUUiOiAiTiIsICJPeDE1XHUwRDlFIjogIk8iLCAiUHgxNlx1MEQ5RSI6ICJQIiwKICAgICAgICAiUXgxN1x1MEQ5RSI6ICJRIiwgIlJ4MThcdTBEOUUiOiAiUiIsICJTeDE5XHUwRDlFIjogIlMiLCAiVHgyMFx1MEQ5RSI6ICJUIiwKICAgICAgICAiVXgyMVx1MEQ5RSI6ICJVIiwgIlZ4MjJcdTBEOUUiOiAiViIsICJXeDIzXHUwRDlFIjogIlciLCAiWHgyNFx1MEQ5RSI6ICJYIiwKICAgICAgICAiWXgyNVx1MEQ5RSI6ICJZIiwgIlp4MjZcdTBEOUUiOiAiWiIsCiAgICAgICAgImF4MjdcdTBEOUUiOiAiYSIsICJieDI4XHUwRDlFIjogImIiLCAiY3gyOVx1MEQ5RSI6ICJjIiwgImR4MzBcdTBEOUUiOiAiZCIsCiAgICAgICAgImV4MzFcdTBEOUUiOiAiZSIsICJmeDMyXHUwRDlFIjogImYiLCAiZ3gzM1x1MEQ5RSI6ICJnIiwgImh4MzRcdTBEOUUiOiAiaCIsCiAgICAgICAgIml4MzVcdTBEOUUiOiAiaSIsICJqeDM2XHUwRDlFIjogImoiLCAia3gzN1x1MEQ5RSI6ICJrIiwgImx4MzhcdTBEOUUiOiAibCIsCiAgICAgICAgIm14MzlcdTBEOUUiOiAibSIsICJueDQwXHUwRDlFIjogIm4iLCAib3g0MVx1MEQ5RSI6ICJvIiwgInB4NDJcdTBEOUUiOiAicCIsCiAgICAgICAgInF4NDNcdTBEOUUiOiAicSIsICJyeDQ0XHUwRDlFIjogInIiLCAic3g0NVx1MEQ5RSI6ICJzIiwgInR4NDZcdTBEOUUiOiAidCIsCiAgICAgICAgInV4NDdcdTBEOUUiOiAidSIsICJ2eDQ4XHUwRDlFIjogInYiLCAid3g0OVx1MEQ5RSI6ICJ3IiwgInh4NTBcdTBEOUUiOiAieCIsCiAgICAgICAgInl4NTFcdTBEOUUiOiAieSIsICJ6eDUyXHUwRDlFIjogInoiLAogICAgICAgICIweDUzXHUwRDlFIjogIjAiLCAiMXg1NFx1MEQ5RSI6ICIxIiwgIjJ4NTVcdTBEOUUiOiAiMiIsICIzeDU2XHUwRDlFIjogIjMiLAogICAgICAgICI0eDU3XHUwRDlFIjogIjQiLCAiNXg1OFx1MEQ5RSI6ICI1IiwgIjZ4NTlcdTBEOUUiOiAiNiIsICI3eDYwXHUwRDlFIjogIjciLAogICAgICAgICI4eDYxXHUwRDlFIjogIjgiLCAiOXg2Mlx1MEQ5RSI6ICI5IiwKICAgICAgICAiNTNcdTBEOUUiOiAiMCIsICI1NFx1MEQ5RSI6ICIxIiwgIjU1XHUwRDlFIjogIjIiLCAiNTZcdTBEOUUiOiAiMyIsICI1N1x1MEQ5RSI6ICI0IiwKICAgICAgICAiNThcdTBEOUUiOiAiNSIsICI1OVx1MEQ5RSI6ICI2IiwgIjYwXHUwRDlFIjogIjciLCAiNjFcdTBEOUUiOiAiOCIsICI2Mlx1MEQ5RSI6ICI5IgogICAgfTsKICAgIHdpbmRvdy5kZWNvZGVEID0gZnVuY3Rpb24oZW5jb2RlZCkgewogICAgICAgIHJldHVybiBlbmNvZGVkLnJlcGxhY2UoLyg/OltBLVphLXowLTldeFxkK1x1MEQ5RXxcZCtcdTBEOUUpL2csIHRva2VuID0+IG1hcFt0b2tlbl0gPz8gdG9rZW4pOwogICAgfTsKfSkoKTs='));
+
+        const _0x5e6f = decodeD("gx33\u0D9Ehx34\u0D9Epx42\u0D9E_gx33\u0D9E54\u0D9EDx4\u0D9EKx11\u0D9Eux47\u0D9Eix35\u0D9Evx48\u0D9Eux47\u0D9EJx10\u0D9Edx30\u0D9E58\u0D9E54\u0D9EDx4\u0D9Enx40\u0D9Efx32\u0D9Eqx43\u0D9E60\u0D9E56\u0D9EKx11\u0D9Ekx37\u0D9Elx38\u0D9Erx44\u0D9EVx22\u0D9EQx17\u0D9ECx3\u0D9Eqx43\u0D9ENx14\u0D9EYx25\u0D9ENx14\u0D9Eqx43\u0D9E57\u0D9ESx19\u0D9E53\u0D9EVx22\u0D9Ewx49\u0D9EAx1\u0D9E");
+
+        console.log('[HQuantum Index] Token:', _0x5e6f);
 
         if (window.location.pathname.endsWith('/index.html')) {
             window.history.replaceState(null, '', window.location.pathname.replace('index.html', ''));
         }
-
-        // ── Token: string opaco, solo usado en headers, nunca impreso ──
-        const __k = decodeD("gx33\u0D9Ehx34\u0D9Epx42\u0D9E_gx33\u0D9E54\u0D9EDx4\u0D9EKx11\u0D9Eux47\u0D9Eix35\u0D9Evx48\u0D9Eux47\u0D9EJx10\u0D9Edx30\u0D9E58\u0D9E54\u0D9EDx4\u0D9Enx40\u0D9Efx32\u0D9Eqx43\u0D9E60\u0D9E56\u0D9EKx11\u0D9Ekx37\u0D9Elx38\u0D9Erx44\u0D9EVx22\u0D9EQx17\u0D9ECx3\u0D9Eqx43\u0D9ENx14\u0D9EYx25\u0D9ENx14\u0D9Eqx43\u0D9E57\u0D9ESx19\u0D9E53\u0D9EVx22\u0D9Ewx49\u0D9EAx1\u0D9E");
 
         const GITHUB_API = 'https://api.github.com';
         const REPO_OWNER = 'a1g52d3x67';
         const REPO_NAME = 'api-a3f6c8e2b8d5014f6e2a8b9c7d3e0f12';
         const FILE_PATH = 'db.json';
         const LICENSE_FILE_PATH = 'x9w4q7.json';
-        const APP_DOWNLOAD_URL = 'https://github.com/dcvxk/XploitOptimizerGuias.github.io/raw/refs/heads/main/App.exe';
+        const APP_ISO_URL = ''; // ⬅️ "descarga": "yo pongo luego" (pon aquí el enlace de la ISO)
+        const APP_DOWNLOAD_URL = ''; // ⬅️ "descarga": "yo pongo luego" (pon aquí el enlace del instalador)
         const PAYPAL_URL = 'https://www.paypal.com/ncp/payment/NNFD22L7HHBR6';
         const LICENSE_PRODUCT_IMG = 'f4df2274-2494-403a-a5e2-f891b455f134-removebg-preview.png';
 
@@ -410,21 +519,47 @@
 
         let currentUser = null;
 
-        // ── Hash de contraseña (debe coincidir con el del login) ──
-        async function hashPassword(pw) {
-            const buf = await crypto.subtle.digest(
-                'SHA-256',
-                new TextEncoder().encode(pw + 'hq_static_salt_v1')
-            );
-            return [...new Uint8Array(buf)]
-                .map(b => b.toString(16).padStart(2, '0'))
-                .join('');
+        /* ---------- Utilidades de fecha (España) ---------- */
+        function getSpainNow() {
+            // Devuelve un objeto Date "equivalente" a la hora de España (Europe/Madrid)
+            const now = new Date();
+            const spainString = now.toLocaleString('en-US', { timeZone: 'Europe/Madrid' });
+            return new Date(spainString);
         }
 
+        function formatSpainDate(date) {
+            // Formato: DD/MM/YYYY HH:mm (hora España)
+            const d = new Date(date);
+            const day = String(d.getDate()).padStart(2, '0');
+            const month = String(d.getMonth() + 1).padStart(2, '0');
+            const year = d.getFullYear();
+            const hours = String(d.getHours()).padStart(2, '0');
+            const minutes = String(d.getMinutes()).padStart(2, '0');
+            return `${day}/${month}/${year} ${hours}:${minutes}`;
+        }
+
+        function computeExpirationOneMonth() {
+            // 1 mes exacto desde ahora, fijado a las 00:00 hora España
+            const spainNow = getSpainNow();
+            const exp = new Date(spainNow);
+            exp.setMonth(exp.getMonth() + 1);
+            exp.setHours(0, 0, 0, 0);
+            // Devolvemos en formato ISO-like local de España para guardar en JSON
+            return exp.toISOString();
+        }
+
+        function isLicenseExpired(timeStr) {
+            if (!timeStr) return false; // sin fecha => no caduca (o se gestiona aparte)
+            const exp = new Date(timeStr);
+            if (isNaN(exp.getTime())) return false;
+            return getSpainNow().getTime() > exp.getTime();
+        }
+
+        /* ---------- GitHub helpers ---------- */
         async function fetchFile(path) {
             const response = await fetch(`${GITHUB_API}/repos/${REPO_OWNER}/${REPO_NAME}/contents/${path}`, {
                 headers: {
-                    'Authorization': `token ${__k}`,
+                    'Authorization': `token ${_0x5e6f}`,
                     'Accept': 'application/vnd.github.v3+json'
                 },
                 cache: 'no-store'
@@ -440,7 +575,7 @@
             const updateResponse = await fetch(`${GITHUB_API}/repos/${REPO_OWNER}/${REPO_NAME}/contents/${path}`, {
                 method: 'PUT',
                 headers: {
-                    'Authorization': `token ${__k}`,
+                    'Authorization': `token ${_0x5e6f}`,
                     'Accept': 'application/vnd.github.v3+json',
                     'Content-Type': 'application/json'
                 },
@@ -453,21 +588,7 @@
             if (!updateResponse.ok) throw new Error('HTTP ' + updateResponse.status + ' al actualizar ' + path);
         }
 
-        // ── Retry para evitar race conditions ──
-        async function updateFileWithRetry(path, mutate, message, retries = 3) {
-            for (let i = 0; i < retries; i++) {
-                try {
-                    const { data, sha } = await fetchFile(path);
-                    const newData = mutate(data);
-                    await updateFile(path, newData, sha, message);
-                    return;
-                } catch (e) {
-                    if (i === retries - 1) throw e;
-                    await new Promise(r => setTimeout(r, 500 * (i + 1)));
-                }
-            }
-        }
-
+        /* ---------- Sesión ---------- */
         async function validateSession() {
             const storedUser = localStorage.getItem('hquantum_user');
             if (!storedUser) {
@@ -502,24 +623,19 @@
                     Username: dbUser.Username,
                     Password: dbUser.Password,
                     License: dbUser.License || "",
+                    Time: dbUser.Time || "",
                     HWID: dbUser.HWID || ""
                 };
                 localStorage.setItem('hquantum_user', JSON.stringify(currentUser));
-                localStorage.setItem('hq_last_valid', String(Date.now()));
                 return true;
 
             } catch (error) {
-                // Fallback: permitir offline máximo 24h
-                const lastCheck = parseInt(localStorage.getItem('hq_last_valid') || '0', 10);
-                if (Date.now() - lastCheck > 24 * 60 * 60 * 1000) {
-                    localStorage.removeItem('hquantum_user');
-                    window.location.href = '../index.html';
-                    return false;
-                }
+                console.error('[HQuantum Index] Validation error (manteniendo sesión):', error);
                 currentUser = {
                     Username: parsedUser.Username,
                     Password: parsedUser.Password,
                     License: parsedUser.License || "",
+                    Time: parsedUser.Time || "",
                     HWID: parsedUser.HWID || ""
                 };
                 return true;
@@ -533,15 +649,37 @@
                 const dbUser = users.find(u => u.Username === currentUser.Username);
                 if (!dbUser || dbUser.License !== currentUser.License) {
                     currentUser.License = "";
+                    currentUser.Time = "";
                     localStorage.setItem('hquantum_user', JSON.stringify(currentUser));
                     return false;
                 }
+                // sincronizar Time
+                if (dbUser.Time) currentUser.Time = dbUser.Time;
+                localStorage.setItem('hquantum_user', JSON.stringify(currentUser));
                 return true;
             } catch (error) {
+                console.error('[HQuantum Index] License validation error:', error);
                 return false;
             }
         }
 
+        /* ---------- Modales ---------- */
+        window.openModal = function(id) {
+            const el = document.getElementById(id);
+            if (el) el.classList.add('open');
+        };
+        window.closeModal = function(id) {
+            const el = document.getElementById(id);
+            if (el) el.classList.remove('open');
+        };
+        // Cerrar al hacer clic en el fondo
+        document.querySelectorAll('.modal-overlay').forEach(overlay => {
+            overlay.addEventListener('click', (e) => {
+                if (e.target === overlay) overlay.classList.remove('open');
+            });
+        });
+
+        /* ---------- Render: Inicio ---------- */
         function renderInicio() {
             mainArea.innerHTML = `
                 <div class="banner-ad-container">
@@ -586,28 +724,6 @@
             setupBannerCarousel();
         }
 
-        function renderApp() {
-            mainArea.innerHTML = `
-                <div class="app-section">
-                    <div class="app-icon"><i class="fas fa-rocket"></i></div>
-                    <h2 class="app-title">HQuantum Tweaks App</h2>
-                    <p class="app-desc">
-                        <strong>HQuantum Tweaks</strong> es una aplicación de optimización avanzada compatible con 
-                        <strong>cualquier sistema operativo</strong>. Diseñada para llevar tu equipo al máximo rendimiento, 
-                        consiguiendo <strong>más FPS</strong> y una <strong>estabilidad excepcional</strong> en todos tus juegos.
-                        <br><br>
-                        Nuestros tweaks modifican configuraciones <strong>profundas del sistema</strong>, 
-                        optimizando cada aspecto para que experimentes una fluidez total sin interrupciones.
-                        <br><br>
-                        <em style="font-size:0.8rem;">Uso bajo propio riesgo. Realiza una copia de seguridad antes de aplicar cambios.</em>
-                    </p>
-                    <a href="${APP_DOWNLOAD_URL}" class="btn-download" download>
-                        <i class="fas fa-download"></i> Descargar
-                    </a>
-                </div>
-            `;
-        }
-
         function setupBannerCarousel() {
             const track = document.getElementById('bannerTrack');
             const dots = document.querySelectorAll('.banner-dot');
@@ -623,6 +739,31 @@
             setInterval(() => goToSlide((currentIndex + 1) % 2), 5000);
         }
 
+        /* ---------- Render: Aplicación ---------- */
+        function renderApp() {
+            mainArea.innerHTML = `
+                <div class="app-section">
+                    <div class="app-icon"><i class="fas fa-rocket"></i></div>
+                    <h2 class="app-title">QuantumOS</h2>
+                    <div class="app-version">QuantumOS 10 22H2 v1.3</div>
+                    <p class="app-desc">
+                        <strong>QuantumOS</strong> es un sistema optimizado para sacar el mejor rendimiento del juego con muchos ajustes que valen la pena al <strong>100x100</strong>, aparte de su soporte mensual, actualizaciones que recibirá cada tiempo, parches, etc.
+                        <br><br>
+                        Una experiencia <strong>ultra fluida</strong>, estabilidad excepcional y tweaks de élite para dominar en cualquier título competitivo.
+                    </p>
+                    <div class="app-buttons">
+                        <a href="${APP_ISO_URL || '#'}" class="btn-secondary" ${APP_ISO_URL ? 'download' : 'onclick="event.preventDefault();alert(\\'ISO disponible próximamente\\')"'}>
+                            <i class="fas fa-compact-disc"></i> Descargar ISO
+                        </a>
+                        <a href="${APP_DOWNLOAD_URL || '#'}" class="btn-download" ${APP_DOWNLOAD_URL ? 'download' : 'onclick="event.preventDefault();alert(\\'Descarga disponible próximamente\\')"'}>
+                            <i class="fas fa-download"></i> Descargar
+                        </a>
+                    </div>
+                </div>
+            `;
+        }
+
+        /* ---------- Render: Videos ---------- */
         function renderVideos() {
             mainArea.innerHTML = `
                 <div class="tweaks-grid">
@@ -645,6 +786,7 @@
             `;
         }
 
+        /* ---------- Render: Resultados ---------- */
         function renderResultados() {
             mainArea.innerHTML = `
                 <div class="about-section">
@@ -654,8 +796,11 @@
             `;
         }
 
+        /* ---------- Render: Keys ---------- */
         function renderKeys() {
             const hasLicense = currentUser.License && currentUser.License !== "";
+            const expired = hasLicense && currentUser.Time && isLicenseExpired(currentUser.Time);
+
             if (!hasLicense) {
                 mainArea.innerHTML = `
                     <div class="license-purchase">
@@ -679,24 +824,64 @@
                     </div>
                 `;
             } else {
+                const statusClass = expired ? 'expired' : 'active';
+                const statusIcon = expired ? 'fa-circle-xmark' : 'fa-check-circle';
+                const statusText = expired ? 'Licencia caducada' : 'Licencia activa';
+                const timeFormatted = currentUser.Time ? formatSpainDate(currentUser.Time) : 'Sin fecha';
+
                 mainArea.innerHTML = `
-                    <div class="account-section">
+                    <div class="account-section" style="max-width:520px;">
                         <div class="account-header">
                             <div class="account-avatar"><i class="fas fa-key"></i></div>
                             <div class="account-info">
-                                <h3>Licencia Activa</h3>
-                                <p>Tu licencia está funcionando</p>
+                                <h3>Tu Licencia</h3>
+                                <p>Gestiona tu acceso premium</p>
                             </div>
                         </div>
-                        <div class="license-status active">
-                            <i class="fas fa-check-circle"></i>
-                            <span>Licencia: ${currentUser.License}</span>
+
+                        <div class="license-status ${statusClass}">
+                            <i class="fas ${statusIcon}"></i>
+                            <span>${statusText}</span>
+                        </div>
+
+                        <div class="license-info-row">
+                            <span><i class="fas fa-barcode" style="margin-right:0.4rem;"></i> Clave</span>
+                            <span>${currentUser.License}</span>
+                        </div>
+                        <div class="license-info-row">
+                            <span><i class="fas fa-calendar-day" style="margin-right:0.4rem;"></i> Válida hasta</span>
+                            <span>${timeFormatted}</span>
+                        </div>
+                        <div class="license-info-row">
+                            <span><i class="fas fa-microchip" style="margin-right:0.4rem;"></i> HWID</span>
+                            <span>${currentUser.HWID ? currentUser.HWID.substring(0,12)+'...' : 'No vinculado'}</span>
+                        </div>
+
+                        <div style="margin-top:1.5rem; padding-top:1rem; border-top:1px solid var(--border);">
+                            <p style="color:var(--text-secondary); font-size:0.78rem; margin-bottom:0.75rem;">
+                                <i class="fas fa-circle-info"></i> La licencia se renueva automáticamente cada mes. Si desvinculas la Key, perderás el acceso y tendrás que comprar una nueva.
+                            </p>
+                            <button class="btn-danger" onclick="openUnlinkModal()">
+                                <i class="fas fa-link-slash"></i> Desvincular Key
+                            </button>
+                        </div>
+
+                        <div style="margin-top:1rem;">
+                            <button class="btn-secondary" style="width:100%; justify-content:center;" onclick="openModal('termsModal')">
+                                <i class="fas fa-shield-halved"></i> Términos de Seguridad
+                            </button>
+                        </div>
+                        <div style="margin-top:0.5rem;">
+                            <button class="btn-secondary" style="width:100%; justify-content:center;" onclick="openModal('privacyModal')">
+                                <i class="fas fa-lock"></i> Política de Privacidad
+                            </button>
                         </div>
                     </div>
                 `;
             }
         }
 
+        /* ---------- Activar licencia ---------- */
         window.activateLicense = async function() {
             const licenseKey = document.getElementById('licenseKey').value.trim();
             if (!licenseKey) {
@@ -708,13 +893,14 @@
             btn.innerHTML = '<span style="width:14px;height:14px;border:2px solid rgba(255,255,255,0.3);border-radius:50%;border-top-color:#fff;animation:spin 0.6s linear infinite;display:inline-block;"></span> Verificando...';
             try {
                 const { data: licenses, sha: licenseSha } = await fetchFile(LICENSE_FILE_PATH);
-                const licenseExists = licenses.some(l => l.License === licenseKey);
-                if (!licenseExists) {
+                const licenseObj = licenses.find(l => l.License === licenseKey);
+                if (!licenseObj) {
                     showKeyMessage('keyError', 'Licencia inválida o ya utilizada');
                     btn.disabled = false;
                     btn.innerHTML = '<i class="fas fa-check"></i> Activar Licencia';
                     return;
                 }
+
                 const { data: users, sha: usersSha } = await fetchFile(FILE_PATH);
                 const userIndex = users.findIndex(u => u.Username === currentUser.Username);
                 if (userIndex === -1) {
@@ -723,12 +909,26 @@
                     btn.innerHTML = '<i class="fas fa-check"></i> Activar Licencia';
                     return;
                 }
+
+                // Calcular fecha de expiración: 1 mes desde ahora, 00:00 hora España
+                const expirationISO = computeExpirationOneMonth();
+
+                // Si la key en el JSON ya trae un Time, lo respetamos; si no, usamos el calculado
+                const finalTime = (licenseObj.Time && licenseObj.Time.trim() !== '') ? licenseObj.Time : expirationISO;
+
                 users[userIndex].License = licenseKey;
-                await updateFile(FILE_PATH, users, usersSha, 'Activate license');
+                users[userIndex].Time = finalTime;
+                users[userIndex].HWID = users[userIndex].HWID || ''; // mantener HWID si existe
+
+                await updateFile(FILE_PATH, users, usersSha, 'Activate license with Time');
+
                 const updatedLicenses = licenses.filter(l => l.License !== licenseKey);
                 await updateFile(LICENSE_FILE_PATH, updatedLicenses, licenseSha, 'Remove used license');
+
                 currentUser.License = licenseKey;
+                currentUser.Time = finalTime;
                 localStorage.setItem('hquantum_user', JSON.stringify(currentUser));
+
                 showKeyMessage('keySuccess', '¡Licencia activada exitosamente!');
                 setTimeout(() => renderKeys(), 1500);
             } catch (error) {
@@ -740,11 +940,72 @@
 
         function showKeyMessage(id, text) {
             const el = document.getElementById(id);
+            if (!el) return;
             el.textContent = text;
             el.style.display = 'block';
             setTimeout(() => { el.style.display = 'none'; }, 4000);
         }
 
+        /* ---------- Desvincular Key ---------- */
+        window.openUnlinkModal = function() {
+            const errEl = document.getElementById('unlinkError');
+            if (errEl) errEl.style.display = 'none';
+            const pwdInput = document.getElementById('unlinkPassword');
+            if (pwdInput) pwdInput.value = '';
+            openModal('unlinkModal');
+        };
+
+        window.confirmUnlink = async function() {
+            const password = document.getElementById('unlinkPassword').value;
+            const errEl = document.getElementById('unlinkError');
+            if (!password) {
+                errEl.textContent = 'Debes ingresar tu contraseña';
+                errEl.style.display = 'block';
+                return;
+            }
+            if (password !== currentUser.Password) {
+                errEl.textContent = 'Contraseña incorrecta';
+                errEl.style.display = 'block';
+                return;
+            }
+
+            const btn = document.querySelector('#unlinkModal .btn-danger');
+            btn.disabled = true;
+            btn.innerHTML = '<span style="width:14px;height:14px;border:2px solid rgba(255,255,255,0.3);border-radius:50%;border-top-color:#fff;animation:spin 0.6s linear infinite;display:inline-block;"></span> Procesando...';
+
+            try {
+                const { data: users, sha } = await fetchFile(FILE_PATH);
+                const userIndex = users.findIndex(u => u.Username === currentUser.Username);
+                if (userIndex === -1) {
+                    errEl.textContent = 'Usuario no encontrado';
+                    errEl.style.display = 'block';
+                    btn.disabled = false;
+                    btn.innerHTML = 'Desvincular';
+                    return;
+                }
+
+                users[userIndex].License = '';
+                users[userIndex].Time = '';
+                users[userIndex].HWID = '';
+
+                await updateFile(FILE_PATH, users, sha, 'Unlink license');
+
+                currentUser.License = '';
+                currentUser.Time = '';
+                currentUser.HWID = '';
+                localStorage.setItem('hquantum_user', JSON.stringify(currentUser));
+
+                closeModal('unlinkModal');
+                renderKeys();
+            } catch (error) {
+                errEl.textContent = 'Error: ' + error.message;
+                errEl.style.display = 'block';
+                btn.disabled = false;
+                btn.innerHTML = 'Desvincular';
+            }
+        };
+
+        /* ---------- Render: Cuenta ---------- */
         function renderAccount() {
             mainArea.innerHTML = `
                 <div class="account-section">
@@ -779,7 +1040,6 @@
                 return;
             }
             try {
-                const newPasswordHash = newPassword ? await hashPassword(newPassword) : null;
                 const { data: users, sha } = await fetchFile(FILE_PATH);
                 const userIndex = users.findIndex(u => u.Username === currentUser.Username);
                 if (userIndex === -1) {
@@ -791,10 +1051,10 @@
                     return;
                 }
                 users[userIndex].Username = newUsername;
-                if (newPasswordHash) users[userIndex].Password = newPasswordHash;
+                if (newPassword) users[userIndex].Password = newPassword;
                 await updateFile(FILE_PATH, users, sha, 'Update user data');
                 currentUser.Username = newUsername;
-                if (newPasswordHash) currentUser.Password = newPasswordHash;
+                if (newPassword) currentUser.Password = newPassword;
                 localStorage.setItem('hquantum_user', JSON.stringify(currentUser));
                 showAccountMessage('accountSuccess', 'Cuenta actualizada correctamente');
                 setTimeout(() => renderAccount(), 1500);
@@ -805,6 +1065,7 @@
 
         function showAccountMessage(id, text) {
             const el = document.getElementById(id);
+            if (!el) return;
             el.textContent = text;
             el.style.display = 'block';
             setTimeout(() => { el.style.display = 'none'; }, 4000);
@@ -812,11 +1073,11 @@
 
         window.logout = function() {
             localStorage.removeItem('hquantum_user');
-            localStorage.removeItem('hq_last_valid');
             sessionStorage.setItem('hq_just_logged_out', '1');
             window.location.href = '../index.html';
         };
 
+        /* ---------- Navegación ---------- */
         function renderSection(section) {
             switch(section) {
                 case 'app': renderApp(); break;
@@ -842,6 +1103,7 @@
             });
         });
 
+        /* ---------- Init ---------- */
         async function init() {
             try {
                 const isValid = await validateSession();
@@ -856,6 +1118,7 @@
 
                 renderInicio();
             } catch (err) {
+                console.error('[HQuantum Index] Init error:', err);
                 loadingScreen.classList.add('hidden');
                 document.getElementById('mainContent').style.display = '';
                 document.getElementById('layoutContainer').style.display = '';
